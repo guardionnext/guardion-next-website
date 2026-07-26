@@ -1,0 +1,20 @@
+# Guardion
+
+> Guardion is an Australian specialist protection and investigations firm. We provide close protection and lawful private investigations for high-net-worth individuals, executives, family offices and organisations. Licensed across QLD, NSW, ACT, VIC and SA; coordinating internationally through vetted local partners.
+
+Positioning: Protection & Intelligence — end to end.
+
+## Key pages
+- [Home](/): Overview of Guardion and the combined protection + intelligence model.
+- [Services](/services): All service capabilities.
+- [Close Protection](/services/close-protection)
+- [Executive Protection](/services/executive-protection)
+- [Residential Security](/services/residential-security)
+- [Security Driving](/services/security-driving)
+- [Investigations](/services/investigations)
+- [Tailored Security](/services/tailored-security)
+- [Global Reach](/global-reach): How international engagements are coordinated.
+- [About](/about): James McKelliff and firm philosophy.
+- [Our Work](/our-work): Anonymised case studies.
+- [Blog](/blog)
+- [Contact](/contact): Confidential consultation. Phone +61 401 207 060 (24hr). Email info@guardion.com.au.
