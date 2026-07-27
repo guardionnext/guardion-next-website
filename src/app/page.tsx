@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 const STATS = [
-  { label: "Licensed across", value: "5 Australian states" },
+  { label: "Licensed across", value: "5 states & territories" },
   { label: "Operating", value: "Worldwide" },
   { label: "Response", value: "24-hour" },
 ];
@@ -364,7 +364,8 @@ function GlobalReachTeaser() {
             </h2>
             <p className="mt-6 max-w-[56ch] text-base leading-relaxed text-text-mute">
               We hold security licences across five Australian states and
-              coordinate protection abroad through a vetted network of trusted
+              territories, and coordinate protection abroad through a vetted
+              network of trusted
               operatives and local partners — always within the law of the
               operating jurisdiction. We do not maintain owned offices overseas,
               and we do not pretend to.
