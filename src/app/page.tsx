@@ -48,7 +48,7 @@ const CRED = [
   {
     icon: Award,
     title: "Operator pedigree",
-    body: "Backgrounds in Australian law enforcement and military service.",
+    body: "Backgrounds in Australian Defence Force service and the licensed security industry.",
   },
   {
     icon: Lock,

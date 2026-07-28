@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, Phone, Mail } from "lucide-react";
 import { Logo } from "./Logo";
@@ -9,7 +10,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1280px] px-6 py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Logo />
+            <Logo variant="white" />
             <p className="mt-6 max-w-[32ch] text-sm leading-relaxed text-text-mute">
               {SITE.tagline}. An Australian firm providing close protection and
               private investigations for individuals and organisations, at home
@@ -38,6 +39,13 @@ export function Footer() {
                 <Linkedin className="h-4 w-4" />
               </a>
             </div>
+            <Image
+              src="/aus_veteran_owned_business.png"
+              alt="Australian Veteran Owned Business"
+              width={1450}
+              height={1536}
+              className="mt-10 h-20 w-auto"
+            />
           </div>
 
           <div className="md:col-span-2">
@@ -126,7 +134,16 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-8 text-xs text-text-mute md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Guardion Pty Ltd. All rights reserved.</p>
+          <div className="space-y-1">
+            <p>
+              © {new Date().getFullYear()} {SITE.legalName}. All rights
+              reserved.
+            </p>
+            <p>
+              Trading as Guardion · ABN{" "}
+              <span className="tabular-nums">{SITE.abn}</span>
+            </p>
+          </div>
           <p className="max-w-[52ch] md:text-right">
             Guardion operates in accordance with Australian security industry
             law. International engagements are coordinated through vetted local

@@ -44,7 +44,12 @@ export function Header() {
           scrolled ? "h-16" : "h-20"
         }`}
       >
-        <Logo priority />
+        <Logo
+          priority
+          imgClassName={`w-auto shrink-0 transition-all duration-300 ${
+            scrolled ? "h-10" : "h-12"
+          }`}
+        />
 
         <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
           <div

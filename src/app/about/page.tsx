@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ShieldCheck, Scale, Eye } from "lucide-react";
+import { ShieldCheck, Scale, Eye, ArrowUpRight, HeartHandshake, BadgeCheck } from "lucide-react";
 import heroImage from "@/assets/hero-night-city.jpg";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -25,10 +25,42 @@ const VALUES = [
   },
 ];
 
+const FOUNDER_QUALS = [
+  "Ronin South Africa — Close Protection (FREC3 Medical, Firearms & Advanced Driving)",
+  "Australian Defence Force — Royal Australian Artillery (2013–2021)",
+  "Licensed Private Investigator",
+  "NGV1 Security Clearance",
+  "Diploma of Security Risk Management",
+  "Certificate IV in Security Management",
+  "SA Firearms Licence for Security (H6)",
+  "Heavy Combination & advanced protective driving licences",
+];
+
+const AFFILIATIONS = [
+  {
+    icon: HeartHandshake,
+    label: "Veteran support",
+    name: "Soldier On",
+    logo: "/soldieron.png",
+    logoAlt: "Soldier On",
+    certificate: "/certificates/soldier-on.pdf",
+    body: "Guardion is a veteran-owned business, and we give back to the military community that shaped us. We are proud supporters of Soldier On — a not-for-profit delivering holistic support to current and former Australian Defence Force personnel and their families. Soldier On has featured our partnership in an article, reflecting the values we share with those who have served.",
+  },
+  {
+    icon: BadgeCheck,
+    label: "Industry membership",
+    name: "ASIAL",
+    logo: "/asial.jpg",
+    logoAlt: "Australian Security Industry Association Limited (ASIAL)",
+    certificate: "/certificates/asial.pdf",
+    body: "Guardion is a member of the Australian Security Industry Association Limited (ASIAL), the peak body for Australia's security profession. Membership holds us to ASIAL's standards of professionalism, integrity and compliance, and keeps us engaged with industry best practice through training, accreditation and regulatory engagement.",
+  },
+];
+
 export const metadata: Metadata = {
   title: "About — James McKelliff & the Guardion Standard | Guardion",
   description:
-    "Guardion is led by James McKelliff. Learn about the firm's founder, its operating philosophy and the standards that govern every engagement.",
+    "Guardion is led by James McKelliff — a Ronin South Africa–certified close protection operator and Australian Defence Force veteran with more than eighteen years in protection and investigations.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Guardion",
@@ -50,7 +82,14 @@ const jsonLd = {
     name: "Guardion",
   },
   description:
-    "Founder of Guardion. Background in law enforcement and military service.",
+    "Founder and principal of Guardion. Ronin South Africa–certified close protection operator and Australian Defence Force (Royal Australian Artillery) veteran with more than eighteen years in the security industry.",
+  knowsAbout: [
+    "Close protection",
+    "Executive protection",
+    "Residential security",
+    "Security driving",
+    "Private investigations",
+  ],
   url: "/about",
 };
 
@@ -109,16 +148,39 @@ export default function About() {
               </div>
               <div className="max-w-[64ch] space-y-6 text-base leading-relaxed text-text-mute md:text-[17px]">
                 <p>
-                  Guardion is led by James McKelliff. His career has been
-                  spent in law enforcement and military service before
-                  founding the firm — disciplines that shape both how the
-                  work is planned and how it is conducted in the field.
+                  Guardion is led by James McKelliff, who has spent more than
+                  eighteen years in protection and public-safety roles across
+                  military and civilian settings. He is a Ronin South
+                  Africa–certified close protection operator, trained to the
+                  FREC3 pre-hospital care standard and in firearms and advanced
+                  protective driving.
                 </p>
-                <p className="border-l border-border pl-6 italic text-foreground/80">
-                  [James&apos;s background — full biographical detail to be
-                  confirmed. This section will carry his specific service
-                  history, appointments and qualifications once approved for
-                  publication.]
+                <p>
+                  From 2013 to 2021 he served with the Australian Defence Force
+                  in the Royal Australian Artillery, on an air-defence missile
+                  and radar team charged with protecting land forces. He
+                  qualified as a military driving instructor and combat-fitness
+                  leader, mentored incoming soldiers, and deployed on Operation
+                  Bushfire Assist. That grounding — readiness, planning and
+                  disciplined execution under pressure — still shapes how every
+                  Guardion task is prepared.
+                </p>
+                <p>
+                  His civilian career spans the full breadth of the industry:
+                  cash-in-transit and armoured work, crowd control and venue
+                  security, residential protection teams, and licensed private
+                  investigations conducted under instruction from law firms. He
+                  has led night-time security operations, run convoy movements
+                  with encrypted team communications, and built and supervised
+                  trusted protection details for private clients.
+                </p>
+                <p>
+                  In recent years his work has taken him into high-profile
+                  environments — international sport and touring teams,
+                  motorsport and televised production — providing close
+                  protection for chairmen, chief executives and their families
+                  in Australia and overseas. In keeping with the firm&apos;s
+                  first principle, the people he protects are not named.
                 </p>
                 <p>
                   His philosophy is straightforward. Good protection is
@@ -133,6 +195,21 @@ export default function About() {
                   duty desk, not a rotating account manager.
                 </p>
               </div>
+            </div>
+
+            {/* Training & qualifications */}
+            <div className="mt-16 border-t border-border pt-12 md:mt-20 md:pt-16">
+              <span className="eyebrow mb-6">Training &amp; qualifications</span>
+              <ul className="mt-8 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+                {FOUNDER_QUALS.map((q) => (
+                  <li
+                    key={q}
+                    className="border-l border-border pl-4 text-sm leading-relaxed text-text-mute"
+                  >
+                    {q}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
@@ -229,6 +306,58 @@ export default function About() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Compliance & affiliations */}
+        <section className="border-t border-border bg-background">
+          <div className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
+            <div className="max-w-[60ch]">
+              <span className="eyebrow mb-6">Compliance &amp; affiliations</span>
+              <h2 className="mt-6 font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
+                Accountable to more than our clients.
+              </h2>
+              <p className="mt-6 text-base leading-relaxed text-text-mute md:text-[17px]">
+                Guardion operates as an ethical member of the security and
+                risk-management industry — compliant with the rules,
+                regulations and legislation that govern it. We value our people
+                and our clients, and respect the countries in which we work.
+              </p>
+            </div>
+            <div className="mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
+              {AFFILIATIONS.map(({ icon: Icon, label, name, body, certificate, logo, logoAlt }) => (
+                <article key={name} className="flex flex-col bg-surface p-8 md:p-10">
+                  <span className="relative flex h-16 w-40 items-center justify-center rounded-md bg-white p-3">
+                    <Image
+                      src={logo}
+                      alt={logoAlt}
+                      fill
+                      sizes="160px"
+                      className="object-contain p-1.5"
+                    />
+                  </span>
+                  <div className="mt-7 flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-text-mute">
+                    <Icon className="h-4 w-4 text-accent" aria-hidden />
+                    {label}
+                  </div>
+                  <h3 className="mt-4 font-serif text-2xl text-foreground">{name}</h3>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-text-mute">
+                    {body}
+                  </p>
+                  {certificate ? (
+                    <a
+                      href={certificate}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-foreground/85 transition hover:text-foreground"
+                    >
+                      View certificate
+                      <ArrowUpRight className="h-4 w-4 text-accent" aria-hidden />
+                    </a>
+                  ) : null}
+                </article>
+              ))}
             </div>
           </div>
         </section>

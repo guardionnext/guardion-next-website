@@ -1,5 +1,7 @@
 export const SITE = {
   name: "Guardion",
+  legalName: "Specialist Protection & Investigations Pty Ltd",
+  abn: "74 683 697 716",
   tagline: "Specialist Protection & Investigations",
   positioning: "Protection & Intelligence — end to end.",
   url: "https://guardion.com.au",
@@ -14,11 +16,11 @@ export const SITE = {
     linkedin: "https://linkedin.com/",
   },
   licences: [
-    { state: "QLD", number: "[QLD Licence No.]" },
-    { state: "NSW", number: "[NSW Master Licence No.]" },
-    { state: "ACT", number: "[ACT Licence No.]" },
+    { state: "QLD", number: "4917079" },
+    { state: "NSW", number: "000110700" },
+    { state: "ACT", number: "00797474" },
     { state: "VIC", number: "[VIC Licence No.]" },
-    { state: "SA", number: "[SA Licence No.]" },
+    { state: "SA", number: "ISL 351789" },
   ],
 } as const;
 
