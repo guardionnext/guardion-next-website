@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Guardion",
     type: "website",
+    locale: "en_AU",
   },
   twitter: {
     card: "summary_large_image",
@@ -45,11 +46,21 @@ export const viewport: Viewport = {
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": `${SITE.url}/#business`,
   name: "Guardion",
+  legalName: SITE.legalName,
   description:
     "Specialist close protection and private investigations. Licensed in Australia; operating worldwide through vetted partners.",
-  telephone: "+61 401 207 060",
-  email: "info@guardion.com.au",
+  url: SITE.url,
+  logo: `${SITE.url}/logo.png`,
+  image: `${SITE.url}/logo.png`,
+  telephone: SITE.phone,
+  email: SITE.email,
+  priceRange: "$$$",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "AU",
+  },
   areaServed: [
     { "@type": "AdministrativeArea", name: "Queensland" },
     { "@type": "AdministrativeArea", name: "New South Wales" },
@@ -62,7 +73,7 @@ const localBusinessJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${inter.variable}`}>
+    <html lang="en-AU" className={`${newsreader.variable} ${inter.variable}`}>
       <body>
         {children}
         <script

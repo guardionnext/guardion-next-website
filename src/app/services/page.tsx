@@ -9,7 +9,7 @@ import { SERVICES } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Services — Close Protection & Investigations | Guardion",
   description:
-    "Six calibrated capabilities: close protection, executive protection, residential security, security driving, private investigations and tailored programs. Australian-licensed; coordinated worldwide.",
+    "Close protection, executive protection, residential security, security driving, investigations and tailored programs. Australian-licensed, coordinated worldwide.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Guardion Services — Protection & Intelligence",

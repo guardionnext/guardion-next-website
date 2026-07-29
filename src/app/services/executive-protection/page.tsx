@@ -46,7 +46,7 @@ const content: ServiceContent = {
 export const metadata: Metadata = {
   title: "Executive Protection for CEOs & Boards | Guardion",
   description:
-    "Coordinated protection for executives, chairs and founders across travel, AGMs and public appearances. Discreet, integrated with the office, delivered to a professional standard.",
+    "Coordinated protection for executives, chairs and founders across travel, AGMs and public appearances. Discreet, integrated with the office and calendar.",
   alternates: { canonical: "/services/executive-protection" },
   openGraph: {
     title: "Executive Protection — Guardion",

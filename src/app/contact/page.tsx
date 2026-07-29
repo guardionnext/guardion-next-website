@@ -9,7 +9,7 @@ import { ContactForm } from "./ContactForm";
 export const metadata: Metadata = {
   title: "Contact — Request a Confidential Consultation | Guardion",
   description:
-    "Request a confidential consultation with Guardion. Discreet enquiry handling for close protection, executive protection, residential security, security driving, private investigations and tailored security programs. 24-hour phone +61 401 207 060.",
+    "Request a confidential consultation with Guardion for close protection, executive protection, investigations and security driving. Discreet, 24-hour response.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact Guardion — Request a Confidential Consultation",
@@ -27,9 +27,9 @@ const jsonLd = {
   name: "Contact Guardion",
   description:
     "Request a confidential consultation with Guardion for close protection and private investigations.",
-  url: "/contact",
-  telephone: "+61 401 207 060",
-  email: "info@guardion.com.au",
+  url: `${SITE.url}/contact`,
+  telephone: SITE.phone,
+  email: SITE.email,
   areaServed: [
     { "@type": "AdministrativeArea", name: "Queensland" },
     { "@type": "AdministrativeArea", name: "New South Wales" },

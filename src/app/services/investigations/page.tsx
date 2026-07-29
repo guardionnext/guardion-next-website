@@ -44,9 +44,9 @@ const content: ServiceContent = {
 };
 
 export const metadata: Metadata = {
-  title: "Private Investigations Australia — Licensed & Confidential | Guardion",
+  title: "Private Investigations Australia — Licensed | Guardion",
   description:
-    "Licensed private investigations producing court-admissible evidence. Threat assessments, surveillance, due diligence and workplace enquiries — conducted lawfully and in strict confidence.",
+    "Licensed private investigations producing court-admissible evidence. Threat assessments, surveillance, due diligence and workplace enquiries, in strict confidence.",
   alternates: { canonical: "/services/investigations" },
   openGraph: {
     title: "Investigations — Guardion",

@@ -9,7 +9,7 @@ import { ContactBand } from "@/components/site/ContactBand";
 import { getAllPosts, formatPostDate } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Field Notes — The Guardion Blog | Protection & Investigations",
+  title: "Field Notes — Protection & Investigations Blog | Guardion",
   description:
     "Considered, practical writing on close protection, executive security and lawful private investigations, from the principals of Guardion.",
   alternates: { canonical: "/blog" },

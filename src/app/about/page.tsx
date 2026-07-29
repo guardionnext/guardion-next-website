@@ -60,7 +60,7 @@ const AFFILIATIONS = [
 export const metadata: Metadata = {
   title: "About — James McKelliff & the Guardion Standard | Guardion",
   description:
-    "Guardion is led by James McKelliff — a Ronin South Africa–certified close protection operator and Australian Defence Force veteran with more than eighteen years in protection and investigations.",
+    "Guardion is led by James McKelliff — a Ronin South Africa–certified close protection operator and ADF veteran with 18+ years in protection and investigations.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Guardion",
@@ -79,6 +79,7 @@ const jsonLd = {
   jobTitle: "Founder & Principal",
   worksFor: {
     "@type": "Organization",
+    "@id": `${SITE.url}/#business`,
     name: "Guardion",
   },
   description:
@@ -90,7 +91,7 @@ const jsonLd = {
     "Security driving",
     "Private investigations",
   ],
-  url: "/about",
+  url: `${SITE.url}/about`,
 };
 
 export default function About() {

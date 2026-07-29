@@ -6,6 +6,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { getPostBySlug, getAllPosts, formatPostDate } from "@/lib/blog";
+import { SITE } from "@/lib/site";
 
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
@@ -52,6 +53,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const url = `/blog/${slug}`;
+  const absoluteUrl = `${SITE.url}${url}`;
   const others = getAllPosts().filter((p) => p.slug !== post.slug).slice(0, 2);
 
   const jsonLd = {
@@ -59,17 +61,34 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
+    image: `${SITE.url}/logo.png`,
     datePublished: post.date,
-    author: { "@type": "Organization", name: post.author },
-    publisher: { "@type": "Organization", name: "Guardion" },
-    mainEntityOfPage: url,
+    dateModified: post.date,
+    author: { "@type": "Organization", name: post.author, url: SITE.url },
+    publisher: {
+      "@type": "Organization",
+      name: "Guardion",
+      logo: { "@type": "ImageObject", url: `${SITE.url}/logo.png` },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl },
+    url: absoluteUrl,
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Field Notes", item: `${SITE.url}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: absoluteUrl },
+    ],
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbJsonLd]) }}
       />
       <Header />
       <main id="main">

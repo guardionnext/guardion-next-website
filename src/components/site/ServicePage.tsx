@@ -5,7 +5,7 @@ import heroImage from "@/assets/hero-night-city.jpg";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
-import { SERVICES } from "@/lib/site";
+import { SERVICES, SITE } from "@/lib/site";
 
 export type ServiceStep = { title: string; body: string };
 
@@ -33,6 +33,12 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildServiceBreadcrumbJsonLd(content)),
+        }}
+      />
       <Header />
       <main id="main">
         {/* Hero */}
@@ -227,12 +233,7 @@ export function buildServiceJsonLd(content: ServiceContent) {
     "@type": "Service",
     name: content.title,
     serviceType: content.title,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Guardion",
-      telephone: "+61 401 207 060",
-      email: "info@guardion.com.au",
-    },
+    provider: { "@type": "LocalBusiness", "@id": `${SITE.url}/#business` },
     areaServed: [
       { "@type": "AdministrativeArea", name: "Queensland" },
       { "@type": "AdministrativeArea", name: "New South Wales" },
@@ -242,6 +243,23 @@ export function buildServiceJsonLd(content: ServiceContent) {
       { "@type": "Place", name: "International — coordinated through vetted partners" },
     ],
     description: content.promise,
-    url: `/services/${content.slug}`,
+    url: `${SITE.url}/services/${content.slug}`,
+  };
+}
+
+export function buildServiceBreadcrumbJsonLd(content: ServiceContent) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${SITE.url}/services` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: content.title,
+        item: `${SITE.url}/services/${content.slug}`,
+      },
+    ],
   };
 }
