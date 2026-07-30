@@ -19,7 +19,7 @@ export const SITE = {
     { state: "QLD", number: "4917079" },
     { state: "NSW", number: "000110700" },
     { state: "ACT", number: "00797474" },
-    { state: "VIC", number: "[VIC Licence No.]" },
+    { state: "VIC", number: "987-047-60S" }, // TODO: temporary placeholder — replace with Guardion's VIC business licence once issued
     { state: "SA", number: "ISL 351789" },
   ],
 } as const;
