@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.jpg";
+import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 import { SERVICES, SITE } from "@/lib/site";
 
 export type ServiceStep = { title: string; body: string };
@@ -77,7 +78,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
         {/* What it covers */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
               <div>
                 <span className="eyebrow mb-6">What it covers</span>
@@ -101,12 +102,12 @@ export function ServicePage({ content }: { content: ServiceContent }) {
                 )}
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* How we work */}
         <section className="grain border-t border-border bg-surface">
-          <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="max-w-[52ch]">
               <span className="eyebrow mb-6">How we work</span>
               <h2 className="mt-6 font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
@@ -124,12 +125,12 @@ export function ServicePage({ content }: { content: ServiceContent }) {
                 </li>
               ))}
             </ol>
-          </div>
+          </Reveal>
         </section>
 
         {/* Who it's for */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
               <div>
                 <span className="eyebrow mb-6">Who it's for</span>
@@ -151,12 +152,12 @@ export function ServicePage({ content }: { content: ServiceContent }) {
                 )}
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Anonymised example */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
             <div className="border border-border bg-surface p-10 md:p-14">
               <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-text-mute">
                 <span className="h-2 w-2 bg-accent" aria-hidden />
@@ -174,12 +175,12 @@ export function ServicePage({ content }: { content: ServiceContent }) {
                 </p>
               )}
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Related services */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
                 <span className="eyebrow mb-6">Related capabilities</span>
@@ -217,7 +218,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
                 </Link>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <ContactBand />

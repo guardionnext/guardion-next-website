@@ -12,7 +12,7 @@ export function Logo({
   variant?: "default" | "white";
   imgClassName?: string;
 }) {
-  const src = variant === "white" ? "/logo_white.png" : "/logo.png";
+  const src = variant === "white" ? "/logo_white.webp" : "/logo.webp";
   return (
     <Link
       href="/"

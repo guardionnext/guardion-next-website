@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ShieldCheck, Scale, Eye, ArrowUpRight, HeartHandshake, BadgeCheck } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.jpg";
+import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/lib/site";
 
 const VALUES = [
@@ -41,7 +42,7 @@ const AFFILIATIONS = [
     icon: HeartHandshake,
     label: "Veteran support",
     name: "Soldier On",
-    logo: "/soldieron.png",
+    logo: "/soldieron.webp",
     logoAlt: "Soldier On",
     certificate: "/certificates/soldier-on.pdf",
     body: "Guardion is a veteran-owned business, and we give back to the military community that shaped us. We are proud supporters of Soldier On — a not-for-profit delivering holistic support to current and former Australian Defence Force personnel and their families. Soldier On has featured our partnership in an article, reflecting the values we share with those who have served.",
@@ -50,7 +51,7 @@ const AFFILIATIONS = [
     icon: BadgeCheck,
     label: "Industry membership",
     name: "ASIAL",
-    logo: "/asial.jpg",
+    logo: "/asial.webp",
     logoAlt: "Australian Security Industry Association Limited (ASIAL)",
     certificate: "/certificates/asial.pdf",
     body: "Guardion is a member of the Australian Security Industry Association Limited (ASIAL), the peak body for Australia's security profession. Membership holds us to ASIAL's standards of professionalism, integrity and compliance, and keeps us engaged with industry best practice through training, accreditation and regulatory engagement.",
@@ -136,7 +137,7 @@ export default function About() {
 
         {/* Founder */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
               <div>
                 <span className="eyebrow mb-6">Founder</span>
@@ -212,12 +213,12 @@ export default function About() {
                 ))}
               </ul>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Values */}
         <section className="grain border-t border-border bg-surface">
-          <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="max-w-[52ch]">
               <span className="eyebrow mb-6">Values</span>
               <h2 className="mt-6 font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
@@ -235,12 +236,12 @@ export default function About() {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Firm */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
               <div>
                 <span className="eyebrow mb-6">The firm</span>
@@ -271,12 +272,12 @@ export default function About() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Credentials */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
             <div className="border border-border bg-surface p-10 md:p-14">
               <div className="grid gap-10 md:grid-cols-[1fr_1.4fr] md:items-start">
                 <div>
@@ -308,12 +309,12 @@ export default function About() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Compliance & affiliations */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
             <div className="max-w-[60ch]">
               <span className="eyebrow mb-6">Compliance &amp; affiliations</span>
               <h2 className="mt-6 font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
@@ -360,7 +361,7 @@ export default function About() {
                 </article>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <ContactBand />

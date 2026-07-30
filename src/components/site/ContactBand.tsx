@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Phone, Mail, MessageCircle } from "lucide-react";
+import { Reveal } from "./Reveal";
 import { SITE } from "@/lib/site";
 
 export function ContactBand() {
   return (
     <section className="grain vignette relative overflow-hidden border-t border-border bg-surface">
-      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+      <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
         <div className="grid gap-16 md:grid-cols-[1.2fr_1fr] md:items-end">
           <div>
             <span className="eyebrow mb-6">Speak with us</span>
@@ -74,7 +75,7 @@ export function ContactBand() {
             </p>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

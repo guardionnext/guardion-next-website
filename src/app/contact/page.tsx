@@ -3,6 +3,7 @@ import { Phone, Mail, MessageCircle, ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 import { SITE } from "@/lib/site";
 import { ContactForm } from "./ContactForm";
 
@@ -51,7 +52,7 @@ export default function Contact() {
       <main id="main">
         <Hero />
         <section className="border-b border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 lg:grid-cols-[1.2fr_1fr]">
               <ContactForm />
 
@@ -136,7 +137,7 @@ export default function Contact() {
                 </div>
               </aside>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <ContactBand />

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ShieldAlert } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.jpg";
+import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 import { CaseStudyCard, type CaseStudy } from "@/components/site/CaseStudyCard";
 
 const STUDIES: CaseStudy[] = [
@@ -96,7 +97,7 @@ export default function OurWork() {
 
         {/* Confidentiality note */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 pb-4 pt-16">
+          <Reveal className="mx-auto max-w-[1280px] px-6 pb-4 pt-16">
             <div className="flex items-start gap-4 border border-border bg-surface p-6 md:p-8">
               <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center border border-border text-accent">
                 <ShieldAlert className="h-4 w-4" aria-hidden />
@@ -111,14 +112,16 @@ export default function OurWork() {
                 to disclose that we did it.
               </p>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Case studies */}
         <section className="bg-background">
           <div className="mx-auto max-w-[1280px] space-y-10 px-6 py-16 md:space-y-14 md:py-24">
             {STUDIES.map((study, i) => (
-              <CaseStudyCard key={study.reference} study={study} index={i} />
+              <Reveal key={study.reference}>
+                <CaseStudyCard study={study} index={i} />
+              </Reveal>
             ))}
           </div>
         </section>

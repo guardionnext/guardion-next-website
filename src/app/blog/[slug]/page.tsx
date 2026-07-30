@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 import { getPostBySlug, getAllPosts, formatPostDate } from "@/lib/blog";
 import { SITE } from "@/lib/site";
 
@@ -61,14 +62,14 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
-    image: `${SITE.url}/logo.png`,
+    image: `${SITE.url}/logo.webp`,
     datePublished: post.date,
     dateModified: post.date,
     author: { "@type": "Organization", name: post.author, url: SITE.url },
     publisher: {
       "@type": "Organization",
       name: "Guardion",
-      logo: { "@type": "ImageObject", url: `${SITE.url}/logo.png` },
+      logo: { "@type": "ImageObject", url: `${SITE.url}/logo.webp` },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl },
     url: absoluteUrl,
@@ -116,15 +117,15 @@ export default async function BlogPostPage({
 
         {/* Article body */}
         <section className="bg-background">
-          <div className="mx-auto max-w-[68ch] px-6 py-20 md:py-28">
+          <Reveal className="mx-auto max-w-[68ch] px-6 py-20 md:py-28">
             <article className="post-prose">{post.body}</article>
-          </div>
+          </Reveal>
         </section>
 
         {/* Related */}
         {others.length > 0 && (
           <section className="border-t border-border bg-surface">
-            <div className="mx-auto max-w-[1280px] px-6 py-20 md:py-24">
+            <Reveal className="mx-auto max-w-[1280px] px-6 py-20 md:py-24">
               <span className="eyebrow mb-6">Continue reading</span>
               <ul className="mt-8 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
                 {others.map((p) => (
@@ -146,7 +147,7 @@ export default async function BlogPostPage({
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           </section>
         )}
 

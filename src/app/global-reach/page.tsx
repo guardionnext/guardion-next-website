@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Globe2, PlaneTakeoff, Users, MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.jpg";
+import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 
 const STATES = [
   { code: "QLD", name: "Queensland" },
@@ -87,7 +88,7 @@ export default function GlobalReach() {
 
         {/* Operating model */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
               <div>
                 <span className="eyebrow mb-6">The operating model</span>
@@ -118,12 +119,12 @@ export default function GlobalReach() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Lead use case */}
         <section className="grain border-t border-border bg-surface">
-          <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1.1fr_1fr] md:items-start">
               <div>
                 <span className="eyebrow mb-6">Lead use case</span>
@@ -161,12 +162,12 @@ export default function GlobalReach() {
                 ))}
               </ul>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* How an international engagement works */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="max-w-[52ch]">
               <span className="eyebrow mb-6">A typical international engagement</span>
               <h2 className="mt-6 font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
@@ -184,12 +185,12 @@ export default function GlobalReach() {
                 </li>
               ))}
             </ol>
-          </div>
+          </Reveal>
         </section>
 
         {/* Australian footprint */}
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 pb-24 md:pb-32">
             <div className="border border-border bg-surface p-10 md:p-14">
               <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-start">
                 <div>
@@ -224,7 +225,7 @@ export default function GlobalReach() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <ContactBand />

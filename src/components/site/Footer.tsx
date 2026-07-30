@@ -40,7 +40,7 @@ export function Footer() {
               </a>
             </div>
             <Image
-              src="/aus_veteran_owned_business.png"
+              src="/aus_veteran_owned_business.webp"
               alt="Australian Veteran Owned Business"
               width={1450}
               height={1536}

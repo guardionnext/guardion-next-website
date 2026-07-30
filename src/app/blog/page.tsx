@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.jpg";
+import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 import { getAllPosts, formatPostDate } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -84,7 +85,7 @@ export default function BlogIndex() {
         </section>
 
         <section className="border-t border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-20 md:py-28">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-20 md:py-28">
             <ul className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
               {posts.map((p) => (
                 <li key={p.slug} className="bg-surface">
@@ -111,7 +112,7 @@ export default function BlogIndex() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </section>
 
         <ContactBand />

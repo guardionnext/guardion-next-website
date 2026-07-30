@@ -52,8 +52,8 @@ const localBusinessJsonLd = {
   description:
     "Specialist close protection and private investigations. Licensed in Australia; operating worldwide through vetted partners.",
   url: SITE.url,
-  logo: `${SITE.url}/logo.png`,
-  image: `${SITE.url}/logo.png`,
+  logo: `${SITE.url}/logo.webp`,
+  image: `${SITE.url}/logo.webp`,
   telephone: SITE.phone,
   email: SITE.email,
   priceRange: "$$$",
@@ -73,8 +73,19 @@ const localBusinessJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" className={`${newsreader.variable} ${inter.variable}`}>
+    <html
+      lang="en-AU"
+      className={`${newsreader.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
       <body>
+        {/* Mark JS as available before paint so scroll-reveal hidden states
+            only apply when they can actually be undone (no-JS shows content). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js');",
+          }}
+        />
         {children}
         <script
           type="application/ld+json"

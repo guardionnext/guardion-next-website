@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Reveal } from "@/components/site/Reveal";
 import { SERVICES } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -49,7 +50,7 @@ export default function ServicesIndex() {
         </section>
 
         <section className="bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
+          <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
               {SERVICES.map((s, i) => (
                 <Link
@@ -76,7 +77,7 @@ export default function ServicesIndex() {
                 </Link>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <ContactBand />
