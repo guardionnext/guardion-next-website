@@ -49,3 +49,29 @@ public/                # static files served at the web root
 
 Site-wide content (contact details, service list, licences) lives in
 `src/lib/site.ts`.
+
+## Contact form email (Resend)
+
+The contact form posts to `src/app/api/contact/route.ts`, which sends the
+enquiry via [Resend](https://resend.com). It reads three environment variables
+(see `.env.example`):
+
+| Variable             | Required | Notes                                                             |
+| -------------------- | -------- | ----------------------------------------------------------------- |
+| `RESEND_API_KEY`     | yes\*    | From <https://resend.com/api-keys>.                               |
+| `CONTACT_FROM_EMAIL` | no       | Sender. Must be a domain verified in Resend. Defaults to Resend's shared `onboarding@resend.dev`. |
+| `CONTACT_TO_EMAIL`   | no       | Where enquiries are delivered. Defaults to `info@guardion.com.au`. |
+
+\* The key is read at request time, so the app **builds and deploys without
+it** — the form simply returns a clear "email is not configured" error until the
+key is added. Copy `.env.example` to `.env.local` for local development.
+
+## Deploying to Vercel
+
+1. Import the repository into Vercel — it auto-detects Next.js (no config
+   needed). The app deploys successfully with no environment variables set.
+2. When ready to enable the contact form, add the variables above under
+   **Project → Settings → Environment Variables**, then redeploy.
+3. To send from `info@guardion.com.au` (rather than `onboarding@resend.dev`),
+   verify the `guardion.com.au` domain in Resend and set `CONTACT_FROM_EMAIL`
+   accordingly.

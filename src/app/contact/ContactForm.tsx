@@ -46,12 +46,15 @@ export function ContactForm() {
   const [form, setForm] = useState<FormData>(INITIAL_DATA);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const update = (field: keyof FormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
+    if (submitError) setSubmitError(null);
   };
 
   const validate = (): boolean => {
@@ -65,7 +68,7 @@ export function ContactForm() {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Honeypot — bots that fill this field are ignored silently.
@@ -73,10 +76,37 @@ export function ContactForm() {
 
     if (!validate()) return;
 
-    // TODO: connect form submission (server function, email service, or database).
-    // For now, this page is front-end only and no data is stored or emailed.
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as
+          | { error?: string; errors?: Partial<Record<keyof FormData, string>> }
+          | null;
+        if (data?.errors) setErrors((prev) => ({ ...prev, ...data.errors }));
+        setSubmitError(
+          data?.error ??
+            "Something went wrong sending your enquiry. Please try again, or call us directly.",
+        );
+        return;
+      }
+
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      setSubmitError(
+        "We couldn't reach the server. Please check your connection and try again, or call us directly.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -101,9 +131,9 @@ export function ContactForm() {
                 Thank you. We will be in touch shortly.
               </h3>
               <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-text-mute">
-                Your enquiry has been received. This is a front-end demonstration — no
-                message has been stored or emailed yet. To reach us now, please call or
-                message directly.
+                Your enquiry has been sent. A principal of the firm will respond
+                directly, usually within one business day. To reach us sooner, please
+                call or message directly.
               </p>
               <a
                 href={SITE.phoneHref}
@@ -291,6 +321,12 @@ export function ContactForm() {
             />
           </div>
 
+          {submitError && (
+            <p role="alert" className="text-sm text-accent">
+              {submitError}
+            </p>
+          )}
+
           <div className="flex flex-col items-start gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-[52ch] text-xs leading-relaxed text-text-mute">
               Your enquiry is handled discreetly and in confidence. We do not share
@@ -298,9 +334,10 @@ export function ContactForm() {
             </p>
             <button
               type="submit"
-              className="inline-flex h-12 shrink-0 items-center border border-accent bg-accent px-6 text-sm font-medium text-white transition hover:bg-[#a91f26]"
+              disabled={submitting}
+              className="inline-flex h-12 shrink-0 items-center border border-accent bg-accent px-6 text-sm font-medium text-white transition hover:bg-[#a91f26] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Send enquiry
+              {submitting ? "Sending…" : "Send enquiry"}
             </button>
           </div>
         </form>
