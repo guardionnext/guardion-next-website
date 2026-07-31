@@ -47,6 +47,8 @@
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-text-mute: var(--text-mute);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-deep: var(--accent-deep);
   --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
@@ -61,6 +63,8 @@
   --text: #F2F0ED;
   --text-mute: #9BA1A9;
   --accent-c: #C4262E;
+  --accent-strong: #E23A42;
+  --accent-deep: #5E1418;
 
   --background: var(--bg);
   --foreground: var(--text);
@@ -168,7 +172,62 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%);
+    background: radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,0.38) 100%);
+  }
+}
+
+/*
+ * Brand lion, masked. Fills the element with whatever background it carries,
+ * clipped to the Guardion lion silhouette (public/lion-mark.webp). Used by the
+ * <LionWatermark> component to paint a subtle red lion emerging from shadow.
+ */
+@utility lion-mask {
+  -webkit-mask-image: url("/lion-mark.webp");
+  mask-image: url("/lion-mark.webp");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Soft radial red ambience behind dark sections (place on a relative parent). */
+@utility ambient-red {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      55% 50% at 50% 42%,
+      rgba(196, 38, 46, 0.1),
+      transparent 72%
+    );
+  }
+}
+
+/* Hairline that wipes in from the left — a quiet accent on hover/focus. */
+@utility hair-accent {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: var(--accent-c);
+    transition: transform 400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
   }
 }
 
@@ -198,10 +257,10 @@
 @media (prefers-reduced-motion: no-preference) {
   html.js [data-reveal] {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(44px);
     transition:
-      opacity 700ms cubic-bezier(0.22, 0.61, 0.36, 1),
-      transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Hint the compositor only while an element is still hidden. */
@@ -213,6 +272,68 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Premium editorial motifs
+ * A small vocabulary of decorative textures and motion, tuned to
+ * stay quiet — every animated property is GPU-composited (transform
+ * / opacity only) and every motion is disabled under reduced-motion.
+ * ───────────────────────────────────────────────────────────── */
+
+/* Cinematic slow zoom for hero imagery. */
+@utility kenburns {
+  transform-origin: 68% 58%;
+  animation: kenburns 34s cubic-bezier(0.33, 0, 0.2, 1) forwards;
+}
+@keyframes kenburns {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.19); }
+}
+
+/* Fine dot matrix — a quiet "operations grid" texture. */
+@utility dot-grid {
+  background-image: radial-gradient(
+    rgba(242, 240, 237, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+}
+
+/* Concentric radar-scope rings in faint accent red. */
+@utility scope-rings {
+  background-image: repeating-radial-gradient(
+    circle at center,
+    rgba(196, 38, 46, 0.055) 0 1px,
+    transparent 1px 74px
+  );
+}
+
+/* Horizontal marquee — content is duplicated, so -50% loops seamlessly. */
+@utility marquee-track {
+  animation: marquee 42s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* A single node breathing on the graticule globe. */
+@utility pulse-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-node 3.2s ease-in-out infinite;
+}
+@keyframes pulse-node {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(1.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kenburns { animation: none; transform: scale(1.06); }
+  .marquee-track { animation: none; }
+  .pulse-node { animation: none; }
 }
 
 /* Long-form article prose */

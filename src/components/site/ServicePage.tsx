@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { HeroBackdrop } from "@/components/site/HeroBackdrop";
+import { LionWatermark } from "@/components/site/LionWatermark";
 import { SERVICES, SITE } from "@/lib/site";
 
 export type ServiceStep = { title: string; body: string };
@@ -44,23 +44,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
       <main id="main">
         {/* Hero */}
         <section className="grain vignette relative min-h-[72svh] overflow-hidden">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(14,16,19,0.6) 0%, rgba(14,16,19,0.78) 55%, rgba(14,16,19,0.98) 100%)",
-            }}
-            aria-hidden
-          />
+          <HeroBackdrop />
           <div className="relative z-10 mx-auto flex min-h-[72svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-40 md:pb-28">
             <nav aria-label="Breadcrumb" className="rise mb-8 text-[10px] uppercase tracking-[0.22em] text-text-mute">
               <Link href="/services" className="transition hover:text-foreground">Services</Link>
@@ -106,7 +90,11 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         </section>
 
         {/* How we work */}
-        <section className="grain border-t border-border bg-surface">
+        <section className="grain ambient-red relative overflow-hidden border-t border-border bg-surface">
+          <LionWatermark
+            className="right-[-8%] top-1/2 hidden w-[520px] -translate-y-1/2 lg:block"
+            opacity={0.05}
+          />
           <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="max-w-[52ch]">
               <span className="eyebrow mb-6">How we work</span>

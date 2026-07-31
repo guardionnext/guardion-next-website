@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
+  ArrowRight,
   ShieldCheck,
   Search,
   ChevronDown,
@@ -10,12 +11,22 @@ import {
   Globe2,
   Lock,
   Scale,
+  MapPin,
+  Clock,
+  MessagesSquare,
+  Radar,
+  ClipboardList,
 } from "lucide-react";
 import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
+import { Accreditations } from "@/components/site/Accreditations";
+import { LionWatermark } from "@/components/site/LionWatermark";
 import { Reveal } from "@/components/site/Reveal";
+import { Reticle } from "@/components/site/Reticle";
+import { GlobeGraticule } from "@/components/site/GlobeGraticule";
+import { CapabilitiesMarquee } from "@/components/site/CapabilitiesMarquee";
 import { SERVICES } from "@/lib/site";
 import {
   Accordion,
@@ -127,9 +138,13 @@ export default function HomePage() {
       <main id="main">
         <Hero />
         <PositioningStrip />
+        <CapabilitiesMarquee />
         <Difference />
+        <EthosStatement />
         <ServicesGrid />
+        <EngagementProcess />
         <Credibility />
+        <Accreditations />
         <GlobalReachTeaser />
         <Testimonials />
         <FAQ />
@@ -149,17 +164,49 @@ function Hero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="kenburns object-cover object-[center_60%] brightness-[1.45] contrast-[1.06] saturate-[1.12]"
         aria-hidden
       />
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(14,16,19,0.55) 0%, rgba(14,16,19,0.7) 55%, rgba(14,16,19,0.98) 100%)",
+            "linear-gradient(180deg, rgba(14,16,19,0.14) 0%, rgba(14,16,19,0.3) 44%, rgba(14,16,19,0.7) 76%, rgba(14,16,19,0.97) 100%)",
         }}
         aria-hidden
       />
+      {/* Faint accent wash pooling toward the lion */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(48% 45% at 82% 62%, rgba(196,38,46,0.14), transparent 70%)",
+        }}
+        aria-hidden
+      />
+
+      {/* Brand lion, emerging from the shadow on the right — desktop */}
+      <LionWatermark
+        className="right-[-8%] top-[6%] z-[1] hidden h-[86%] w-[620px] md:block"
+        opacity={0.14}
+      />
+      {/* Brand lion — mobile (tuned smaller so it reads behind the headline) */}
+      <LionWatermark
+        className="right-[-20%] top-[8%] z-[1] block h-[44%] w-[300px] md:hidden"
+        opacity={0.12}
+      />
+
+      {/* Viewfinder framing marks */}
+      <Reticle tone="muted" inset="clamp(1.25rem, 4vw, 3rem)" className="hidden md:block" />
+
+      {/* Editorial vertical label on the far right edge */}
+      <span
+        className="absolute right-6 top-1/2 z-[2] hidden -translate-y-1/2 text-[10px] uppercase tracking-[0.4em] text-text-mute/80 [writing-mode:vertical-rl] lg:block"
+        aria-hidden
+      >
+        Protection · Intelligence
+      </span>
+
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1280px] flex-col justify-end px-6 pb-24 pt-40 md:pb-32">
         <span className="eyebrow rise">Protection &amp; Intelligence — end to end</span>
         <h1 className="rise mt-8 max-w-[18ch] font-serif text-[44px] leading-[1.02] tracking-tight text-foreground sm:text-6xl md:text-[72px]">
@@ -173,9 +220,10 @@ function Hero() {
         <div className="rise mt-10 flex flex-wrap items-center gap-4">
           <Link
             href="/contact"
-            className="inline-flex h-12 items-center border border-accent bg-accent px-6 text-sm font-medium text-white transition hover:bg-[#a91f26]"
+            className="group inline-flex h-12 items-center gap-2 border border-accent bg-accent px-6 text-sm font-medium text-white shadow-[0_18px_40px_-18px_rgba(196,38,46,0.9)] transition hover:bg-[#a91f26]"
           >
             Confidential Consultation
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
             href="/services"
@@ -184,9 +232,27 @@ function Hero() {
             Our Services
           </Link>
         </div>
-        <div className="mt-16 flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-text-mute">
-          <ChevronDown className="h-4 w-4 animate-bounce" aria-hidden />
-          Scroll
+        <div className="rise mt-14 flex flex-col gap-5 border-t border-border/60 pt-8 sm:flex-row sm:items-center sm:gap-10">
+          {[
+            { icon: MapPin, label: "Licensed across Australia" },
+            { icon: Globe2, label: "Coordinated worldwide" },
+            { icon: Clock, label: "24-hour response" },
+          ].map((a) => (
+            <div
+              key={a.label}
+              className="flex items-center gap-2.5 text-xs uppercase tracking-[0.18em] text-text-mute"
+            >
+              <a.icon className="h-4 w-4 text-accent" aria-hidden />
+              {a.label}
+            </div>
+          ))}
+          <span
+            className="hidden items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-text-mute/70 sm:ml-auto lg:inline-flex"
+            aria-hidden
+          >
+            <ChevronDown className="h-4 w-4 animate-bounce" />
+            Scroll
+          </span>
         </div>
       </div>
     </section>
@@ -201,16 +267,21 @@ function PositioningStrip() {
           {STATS.map((s, i) => (
             <li
               key={s.label}
-              className={`flex items-baseline gap-4 py-8 ${
+              className={`group flex items-stretch gap-4 py-9 ${
                 i > 0 ? "md:border-l md:border-border md:pl-12" : ""
               } ${i < STATS.length - 1 ? "border-b border-border md:border-b-0" : ""}`}
             >
-              <span className="h-2 w-2 shrink-0 bg-accent" aria-hidden />
+              <span
+                className="w-[3px] shrink-0 bg-accent transition-all duration-500 group-hover:bg-accent-strong"
+                aria-hidden
+              />
               <div className="min-w-0">
                 <div className="text-[10px] uppercase tracking-[0.22em] text-text-mute">
                   {s.label}
                 </div>
-                <div className="mt-1 font-serif text-2xl text-foreground">{s.value}</div>
+                <div className="mt-1.5 font-serif text-[26px] leading-tight text-foreground">
+                  {s.value}
+                </div>
               </div>
             </li>
           ))}
@@ -222,8 +293,13 @@ function PositioningStrip() {
 
 function Difference() {
   return (
-    <section className="bg-background">
-      <Reveal className="mx-auto max-w-[1280px] px-6 py-28 md:py-36">
+    <section className="relative overflow-hidden bg-background">
+      <LionWatermark
+        flip
+        className="left-[-8%] top-[18%] hidden w-[520px] lg:block"
+        opacity={0.05}
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-28 md:py-36">
         <div className="grid gap-16 md:grid-cols-[1fr_1.4fr] md:items-end">
           <div>
             <span className="eyebrow mb-6">The Guardion difference</span>
@@ -240,33 +316,41 @@ function Difference() {
         </div>
 
         <div className="mt-16 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
-          <article className="bg-surface p-10 md:p-14">
-            <div className="flex items-center gap-3">
+          <article className="hair-accent group relative overflow-hidden bg-surface p-10 transition-colors duration-300 hover:bg-surface-2 md:p-14">
+            <ShieldCheck
+              className="pointer-events-none absolute -right-6 -top-6 h-40 w-40 text-white/[0.02] transition-transform duration-500 group-hover:scale-105"
+              aria-hidden
+            />
+            <div className="relative flex items-center gap-3">
               <ShieldCheck className="h-5 w-5 text-accent" aria-hidden />
               <span className="text-[10px] uppercase tracking-[0.22em] text-text-mute">
                 Protection
               </span>
             </div>
-            <h3 className="mt-6 font-serif text-3xl text-foreground">
+            <h3 className="relative mt-6 font-serif text-3xl text-foreground">
               Presence, without theatre.
             </h3>
-            <p className="mt-5 max-w-[46ch] text-sm leading-relaxed text-text-mute">
-              Close and executive protection built around the principal's day —
+            <p className="relative mt-5 max-w-[46ch] text-sm leading-relaxed text-text-mute">
+              Close and executive protection built around the principal&rsquo;s day —
               quiet, embedded, and rehearsed. From a single movement to a
               standing detail, our operators are chosen for judgement first.
             </p>
           </article>
-          <article className="bg-surface p-10 md:p-14">
-            <div className="flex items-center gap-3">
+          <article className="hair-accent group relative overflow-hidden bg-surface p-10 transition-colors duration-300 hover:bg-surface-2 md:p-14">
+            <Search
+              className="pointer-events-none absolute -right-6 -top-6 h-40 w-40 text-white/[0.02] transition-transform duration-500 group-hover:scale-105"
+              aria-hidden
+            />
+            <div className="relative flex items-center gap-3">
               <Search className="h-5 w-5 text-accent" aria-hidden />
               <span className="text-[10px] uppercase tracking-[0.22em] text-text-mute">
                 Intelligence
               </span>
             </div>
-            <h3 className="mt-6 font-serif text-3xl text-foreground">
+            <h3 className="relative mt-6 font-serif text-3xl text-foreground">
               Answers, on the record.
             </h3>
-            <p className="mt-5 max-w-[46ch] text-sm leading-relaxed text-text-mute">
+            <p className="relative mt-5 max-w-[46ch] text-sm leading-relaxed text-text-mute">
               Lawful, confidential investigations that produce evidence fit for
               court, board or family office. When findings warrant it, the same
               team responsible for the enquiry can stand up the response.
@@ -291,10 +375,10 @@ function ServicesGrid() {
           </div>
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm text-foreground/85 transition hover:text-foreground"
+            className="group inline-flex items-center gap-2 text-sm text-foreground/85 transition hover:text-foreground"
           >
             All services
-            <ArrowUpRight className="h-4 w-4" />
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
         </div>
 
@@ -303,9 +387,15 @@ function ServicesGrid() {
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className="group relative flex flex-col justify-between bg-surface p-8 transition duration-300 hover:bg-surface-2 md:p-10"
+              className="hair-accent group relative flex flex-col justify-between overflow-hidden bg-surface p-8 transition duration-300 hover:bg-surface-2 md:p-10"
             >
-              <div>
+              <span
+                className="pointer-events-none absolute right-5 top-3 font-serif text-[64px] leading-none text-white/[0.03] transition-colors duration-300 group-hover:text-accent/10"
+                aria-hidden
+              >
+                0{i + 1}
+              </span>
+              <div className="relative">
                 <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-text-mute">
                   <span className="tabular-nums">0{i + 1}</span>
                   <span className="h-px w-8 bg-border" />
@@ -315,7 +405,7 @@ function ServicesGrid() {
                   {s.summary}
                 </p>
               </div>
-              <div className="mt-10 flex items-center justify-between">
+              <div className="relative mt-10 flex items-center justify-between">
                 <span className="text-xs uppercase tracking-[0.18em] text-text-mute transition group-hover:text-foreground">
                   Read more
                 </span>
@@ -331,7 +421,11 @@ function ServicesGrid() {
 
 function Credibility() {
   return (
-    <section className="grain border-t border-border bg-surface">
+    <section className="grain ambient-red relative overflow-hidden border-t border-border bg-surface">
+      <LionWatermark
+        className="right-[-6%] top-1/2 hidden w-[560px] -translate-y-1/2 lg:block"
+        opacity={0.055}
+      />
       <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
         <div className="max-w-[52ch]">
           <span className="eyebrow mb-6">Why Guardion</span>
@@ -341,8 +435,13 @@ function Credibility() {
         </div>
         <div className="mt-16 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {CRED.map((c) => (
-            <div key={c.title} className="bg-surface p-8">
-              <c.icon className="h-5 w-5 text-accent" aria-hidden />
+            <div
+              key={c.title}
+              className="hair-accent group bg-surface p-8 transition-colors duration-300 hover:bg-surface-2"
+            >
+              <span className="inline-flex h-11 w-11 items-center justify-center border border-border bg-background/40 transition-colors duration-300 group-hover:border-accent/50">
+                <c.icon className="h-5 w-5 text-accent" aria-hidden />
+              </span>
               <h3 className="mt-6 font-serif text-lg text-foreground">{c.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-text-mute">{c.body}</p>
             </div>
@@ -354,10 +453,16 @@ function Credibility() {
 }
 
 function GlobalReachTeaser() {
+  const regions = ["QLD", "NSW", "ACT", "VIC", "SA", "International"];
   return (
-    <section className="border-t border-border bg-background">
-      <Reveal className="mx-auto max-w-[1280px] px-6 py-28 md:py-36">
-        <div className="grid gap-14 md:grid-cols-[1.1fr_1fr] md:items-center">
+    <section className="relative overflow-hidden border-t border-border bg-background">
+      <LionWatermark
+        flip
+        className="left-[-10%] top-1/2 hidden w-[440px] -translate-y-1/2 lg:block"
+        opacity={0.045}
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-28 md:py-36">
+        <div className="grid gap-16 md:grid-cols-[1.05fr_1fr] md:items-center">
           <div>
             <span className="eyebrow mb-6">Global reach</span>
             <h2 className="mt-6 max-w-[22ch] font-serif text-4xl leading-[1.05] text-foreground md:text-[44px]">
@@ -371,21 +476,51 @@ function GlobalReachTeaser() {
               operating jurisdiction. We do not maintain owned offices overseas,
               and we do not pretend to.
             </p>
+
+            {/* Coverage chips */}
+            <ul className="mt-9 flex flex-wrap gap-2.5">
+              {regions.map((r) => (
+                <li
+                  key={r}
+                  className="group inline-flex items-center gap-2 border border-border bg-surface px-3.5 py-2 text-xs tracking-wide text-foreground/90 transition-colors duration-300 hover:border-accent/50"
+                >
+                  <span
+                    className="h-1.5 w-1.5 shrink-0 bg-accent transition-transform duration-300 group-hover:scale-150"
+                    aria-hidden
+                  />
+                  {r}
+                  {r === "International" && (
+                    <span className="ml-1 text-[9px] uppercase tracking-[0.2em] text-text-mute">
+                      Vetted
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+
             <Link
               href="/global-reach"
-              className="mt-8 inline-flex items-center gap-2 text-sm text-foreground/90 transition hover:text-foreground"
+              className="group mt-9 inline-flex items-center gap-2 text-sm text-foreground/90 transition hover:text-foreground"
             >
               How the model works
-              <ArrowUpRight className="h-4 w-4" />
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-px border border-border bg-border">
-            {["QLD", "NSW", "ACT", "VIC", "SA", "International"].map((r) => (
-              <div key={r} className="flex items-center gap-3 bg-surface p-6">
-                <span className="h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden />
-                <span className="text-sm text-foreground">{r}</span>
-              </div>
-            ))}
+
+          {/* Graticule globe */}
+          <div className="relative mx-auto w-full max-w-[420px]">
+            <div className="scope-rings pointer-events-none absolute inset-[-8%] z-0 opacity-70" aria-hidden />
+            <GlobeGraticule className="relative z-10 text-border" />
+            <div className="relative z-10 mt-6 flex items-center justify-center gap-6 text-[10px] uppercase tracking-[0.2em] text-text-mute">
+              <span className="inline-flex items-center gap-2">
+                <span className="h-2 w-2 bg-accent" aria-hidden />
+                Australian base
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="h-2 w-2 border border-accent/60" aria-hidden />
+                Vetted partners
+              </span>
+            </div>
           </div>
         </div>
       </Reveal>
@@ -395,29 +530,153 @@ function GlobalReachTeaser() {
 
 function Testimonials() {
   return (
-    <section className="border-t border-border bg-background">
-      <Reveal className="mx-auto max-w-[1280px] px-6 py-28 md:py-36">
+    <section className="relative overflow-hidden border-t border-border bg-background">
+      <span
+        className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 font-serif text-[320px] leading-none text-white/[0.02] select-none md:text-[440px]"
+        aria-hidden
+      >
+        &ldquo;
+      </span>
+      <LionWatermark
+        className="right-[-9%] bottom-[-6%] hidden w-[480px] lg:block"
+        opacity={0.04}
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-28 md:py-36">
         <span className="eyebrow mb-6">In their words</span>
         <h2 className="mt-6 max-w-[24ch] font-serif text-4xl leading-[1.05] text-foreground md:text-[44px]">
           Quiet feedback from those who hire us.
         </h2>
         <div className="mt-16 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
           {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="flex h-full flex-col justify-between bg-surface p-8 md:p-10">
+            <figure
+              key={t.name}
+              className="hair-accent group flex h-full flex-col justify-between bg-surface p-8 transition-colors duration-300 hover:bg-surface-2 md:p-10"
+            >
               <blockquote className="font-serif text-lg leading-[1.5] text-foreground/95">
-                <span className="mr-1 text-accent">“</span>
+                <span className="mr-1 text-accent">&ldquo;</span>
                 {t.quote}
-                <span className="ml-1 text-accent">”</span>
+                <span className="ml-1 text-accent">&rdquo;</span>
               </blockquote>
-              <figcaption className="mt-10 border-t border-border pt-5">
-                <div className="text-sm text-foreground">{t.name}</div>
-                <div className="text-[11px] uppercase tracking-[0.18em] text-text-mute">
-                  {t.role}
-                </div>
+              <figcaption className="mt-10 flex items-center gap-4 border-t border-border pt-5">
+                <span
+                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-border bg-background/40 font-serif text-sm tracking-wide text-foreground/90 transition-colors duration-300 group-hover:border-accent/50"
+                  aria-hidden
+                >
+                  {t.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm text-foreground">{t.name}</span>
+                  <span className="block text-[11px] uppercase tracking-[0.18em] text-text-mute">
+                    {t.role}
+                  </span>
+                </span>
               </figcaption>
             </figure>
           ))}
         </div>
+      </Reveal>
+    </section>
+  );
+}
+
+function EthosStatement() {
+  return (
+    <section className="grain ambient-red relative overflow-hidden border-y border-border bg-surface">
+      {/* A larger, imagined lion — present in shadow behind the statement */}
+      <LionWatermark
+        className="left-1/2 top-1/2 hidden w-[760px] -translate-x-1/2 -translate-y-1/2 md:block"
+        opacity={0.06}
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[1000px] px-6 py-32 text-center md:py-44">
+        <div className="mb-8 flex justify-center">
+          <span className="eyebrow">Our ethos</span>
+        </div>
+        <p className="mx-auto max-w-[24ch] font-serif text-3xl leading-[1.16] text-foreground sm:text-4xl md:max-w-[20ch] md:text-[52px] md:leading-[1.12]">
+          The best protection is the kind you never notice — present when it
+          matters, invisible when it doesn&rsquo;t, and absolute either way.
+        </p>
+        <div className="mt-12 flex items-center justify-center gap-4 text-[11px] uppercase tracking-[0.28em] text-text-mute">
+          <span className="h-px w-12 bg-accent" aria-hidden />
+          Guardion
+          <span className="h-px w-12 bg-accent" aria-hidden />
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+function EngagementProcess() {
+  const STEPS = [
+    {
+      icon: MessagesSquare,
+      k: "01",
+      title: "Confidential consultation",
+      body: "A principal of the firm listens first. No obligation, and nothing on the record.",
+    },
+    {
+      icon: Radar,
+      k: "02",
+      title: "Threat & risk assessment",
+      body: "We map the real picture — people, patterns and places — and grade the exposure honestly.",
+    },
+    {
+      icon: ClipboardList,
+      k: "03",
+      title: "Bespoke planning",
+      body: "A right-sized plan: routes, contingencies and the smallest effective footprint.",
+    },
+    {
+      icon: ShieldCheck,
+      k: "04",
+      title: "Discreet execution",
+      body: "Quiet, rehearsed delivery — with the intelligence to adapt as the situation moves.",
+    },
+  ];
+  return (
+    <section className="relative overflow-hidden border-t border-border bg-surface">
+      <div className="dot-grid pointer-events-none absolute inset-0 opacity-50" aria-hidden />
+      <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-28 md:py-36">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <span className="eyebrow mb-6">How we engage</span>
+            <h2 className="mt-6 max-w-[24ch] font-serif text-4xl leading-[1.05] text-foreground md:text-[44px]">
+              A measured path — from first call to standing detail.
+            </h2>
+          </div>
+          <p className="max-w-[40ch] text-sm leading-relaxed text-text-mute">
+            Every engagement follows the same disciplined sequence, scaled to
+            the situation. No theatre, no upsell — only what the picture
+            requires.
+          </p>
+        </div>
+
+        <ol className="mt-16 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s) => (
+            <li
+              key={s.k}
+              className="hair-accent group relative bg-surface p-8 transition-colors duration-300 hover:bg-surface-2 md:p-9"
+            >
+              <span
+                className="pointer-events-none absolute right-5 top-4 font-serif text-[54px] leading-none text-white/[0.03] transition-colors duration-300 group-hover:text-accent/10"
+                aria-hidden
+              >
+                {s.k}
+              </span>
+              <span className="relative inline-flex h-11 w-11 items-center justify-center border border-border bg-background/40 transition-colors duration-300 group-hover:border-accent/50">
+                <s.icon className="h-5 w-5 text-accent" aria-hidden />
+              </span>
+              <h3 className="relative mt-6 font-serif text-xl text-foreground">
+                {s.title}
+              </h3>
+              <p className="relative mt-3 text-sm leading-relaxed text-text-mute">
+                {s.body}
+              </p>
+            </li>
+          ))}
+        </ol>
       </Reveal>
     </section>
   );
@@ -431,10 +690,10 @@ function FAQ() {
           <div>
             <span className="eyebrow mb-6">FAQ</span>
             <h2 className="mt-6 max-w-[16ch] font-serif text-4xl leading-[1.05] text-foreground md:text-[44px]">
-              Questions we're asked, answered plainly.
+              Questions we&rsquo;re asked, answered plainly.
             </h2>
             <p className="mt-6 max-w-[42ch] text-sm leading-relaxed text-text-mute">
-              If your question isn't here, speak with us directly. Every
+              If your question isn&rsquo;t here, speak with us directly. Every
               conversation is confidential.
             </p>
           </div>

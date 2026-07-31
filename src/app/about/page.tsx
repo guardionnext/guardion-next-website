@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ShieldCheck, Scale, Eye, ArrowUpRight, HeartHandshake, BadgeCheck } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { HeroBackdrop } from "@/components/site/HeroBackdrop";
+import { LionWatermark } from "@/components/site/LionWatermark";
 import { SITE } from "@/lib/site";
 
 const VALUES = [
@@ -105,23 +106,7 @@ export default function About() {
       <Header />
       <main id="main">
         <section className="grain vignette relative min-h-[64svh] overflow-hidden">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(14,16,19,0.6) 0%, rgba(14,16,19,0.82) 55%, rgba(14,16,19,0.98) 100%)",
-            }}
-            aria-hidden
-          />
+          <HeroBackdrop />
           <div className="relative z-10 mx-auto flex min-h-[64svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-40 md:pb-28">
             <span className="eyebrow mb-6">About Guardion</span>
             <h1 className="max-w-[22ch] font-serif text-[40px] leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-[64px]">
@@ -217,7 +202,12 @@ export default function About() {
         </section>
 
         {/* Values */}
-        <section className="grain border-t border-border bg-surface">
+        <section className="grain ambient-red relative overflow-hidden border-t border-border bg-surface">
+          <LionWatermark
+            flip
+            className="left-[-9%] top-1/2 hidden w-[520px] -translate-y-1/2 lg:block"
+            opacity={0.05}
+          />
           <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="max-w-[52ch]">
               <span className="eyebrow mb-6">Values</span>

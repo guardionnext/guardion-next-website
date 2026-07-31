@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ShieldAlert } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { HeroBackdrop } from "@/components/site/HeroBackdrop";
 import { CaseStudyCard, type CaseStudy } from "@/components/site/CaseStudyCard";
 
 const STUDIES: CaseStudy[] = [
@@ -65,23 +64,7 @@ export default function OurWork() {
       <Header />
       <main id="main">
         <section className="grain vignette relative min-h-[60svh] overflow-hidden">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(14,16,19,0.6) 0%, rgba(14,16,19,0.82) 55%, rgba(14,16,19,0.98) 100%)",
-            }}
-            aria-hidden
-          />
+          <HeroBackdrop />
           <div className="relative z-10 mx-auto flex min-h-[60svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-40 md:pb-28">
             <span className="eyebrow mb-6">Our Work</span>
             <h1 className="max-w-[22ch] font-serif text-[40px] leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-[64px]">

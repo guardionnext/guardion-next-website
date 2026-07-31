@@ -32,6 +32,7 @@ export function Header() {
   }, [open]);
 
   return (
+    <>
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
@@ -132,8 +133,11 @@ export function Header() {
           <Menu className="h-5 w-5" />
         </button>
       </div>
+    </header>
 
-      {/* Mobile overlay */}
+      {/* Mobile overlay — a sibling of <header>, not a child, so the header's
+          backdrop-filter can't trap this fixed overlay inside its containing
+          block (which clipped the menu once the page had been scrolled). */}
       {open && (
         <div className="fixed inset-0 z-[60] flex flex-col bg-background lg:hidden">
           <div className="flex h-20 items-center justify-between border-b border-border px-6">
@@ -199,6 +203,6 @@ export function Header() {
           </a>
         </div>
       )}
-    </header>
+    </>
   );
 }

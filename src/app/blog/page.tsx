@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { HeroBackdrop } from "@/components/site/HeroBackdrop";
 import { getAllPosts, formatPostDate } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -54,23 +53,7 @@ export default function BlogIndex() {
       <Header />
       <main id="main">
         <section className="grain vignette relative overflow-hidden">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(14,16,19,0.7) 0%, rgba(14,16,19,0.9) 60%, rgba(14,16,19,1) 100%)",
-            }}
-            aria-hidden
-          />
+          <HeroBackdrop overlay="strong" />
           <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-20 pt-40 md:pb-28 md:pt-48">
             <span className="eyebrow mb-6">Field notes</span>
             <h1 className="max-w-[24ch] font-serif text-[40px] leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-[64px]">

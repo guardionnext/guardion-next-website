@@ -113,7 +113,7 @@ export function ContactForm() {
     <div>
       <span className="eyebrow mb-6">Enquiry form</span>
       <h2 className="mt-6 font-serif text-4xl leading-[1.05] text-foreground md:text-[44px]">
-        Request a confidential consultation.
+        Send a confidential enquiry.
       </h2>
       <p className="mt-6 max-w-[56ch] text-base leading-relaxed text-text-mute">
         Tell us briefly what you need. A principal of the firm will respond directly,

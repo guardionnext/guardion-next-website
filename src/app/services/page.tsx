@@ -5,6 +5,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { LionWatermark } from "@/components/site/LionWatermark";
 import { SERVICES } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -27,8 +28,19 @@ export default function ServicesIndex() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main id="main">
-        <section className="border-b border-border bg-background">
-          <div className="mx-auto max-w-[1280px] px-6 pb-20 pt-40 md:pb-28 md:pt-48">
+        <section className="grain relative overflow-hidden border-b border-border bg-background">
+          <div className="dot-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+          {/* Brand lion — desktop */}
+          <LionWatermark
+            className="right-[-6%] top-[-10%] z-[1] hidden h-[130%] w-[560px] md:block"
+            opacity={0.06}
+          />
+          {/* Brand lion — mobile */}
+          <LionWatermark
+            className="right-[-24%] top-[6%] z-[1] block h-[70%] w-[300px] md:hidden"
+            opacity={0.07}
+          />
+          <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-20 pt-40 md:pb-28 md:pt-48">
             <span className="eyebrow mb-6">Services</span>
             <h1 className="mt-6 max-w-[22ch] font-serif text-[40px] leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-[64px]">
               Protection and intelligence, offered as one.

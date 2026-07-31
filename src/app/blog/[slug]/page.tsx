@@ -6,6 +6,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { LionWatermark } from "@/components/site/LionWatermark";
 import { getPostBySlug, getAllPosts, formatPostDate } from "@/lib/blog";
 import { SITE } from "@/lib/site";
 
@@ -95,6 +96,10 @@ export default async function BlogPostPage({
       <main id="main">
         {/* Article header */}
         <section className="grain relative overflow-hidden border-b border-border bg-background">
+          <LionWatermark
+            className="right-[-10%] top-[-6%] hidden h-[128%] w-[440px] xl:block"
+            opacity={0.04}
+          />
           <div className="relative z-10 mx-auto max-w-[780px] px-6 pb-16 pt-40 md:pt-48">
             <Link
               href="/blog"

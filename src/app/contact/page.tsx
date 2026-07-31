@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Phone, Mail, MessageCircle, ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { LionWatermark } from "@/components/site/LionWatermark";
 import { SITE } from "@/lib/site";
 import { ContactForm } from "./ContactForm";
 
@@ -51,7 +51,7 @@ export default function Contact() {
       <Header />
       <main id="main">
         <Hero />
-        <section className="border-b border-border bg-background">
+        <section className="bg-background">
           <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 lg:grid-cols-[1.2fr_1fr]">
               <ContactForm />
@@ -139,8 +139,6 @@ export default function Contact() {
             </div>
           </Reveal>
         </section>
-
-        <ContactBand />
       </main>
       <Footer />
     </div>
@@ -149,7 +147,18 @@ export default function Contact() {
 
 function Hero() {
   return (
-    <section className="grain vignette relative overflow-hidden border-b border-border">
+    <section className="grain vignette ambient-red relative overflow-hidden border-b border-border">
+      <div className="dot-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+      {/* Brand lion — desktop */}
+      <LionWatermark
+        className="right-[-6%] top-[-8%] z-[1] hidden h-[128%] w-[560px] md:block"
+        opacity={0.06}
+      />
+      {/* Brand lion — mobile */}
+      <LionWatermark
+        className="right-[-24%] top-[4%] z-[1] block h-[72%] w-[300px] md:hidden"
+        opacity={0.07}
+      />
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-20 pt-40 md:pb-28 md:pt-48">
         <span className="eyebrow">Contact</span>
         <h1 className="mt-6 max-w-[22ch] font-serif text-[40px] leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-[64px]">

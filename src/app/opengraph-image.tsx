@@ -73,7 +73,14 @@ export default function OpengraphImage() {
 
         {/* Footer rule */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", width: 120, height: 4, backgroundColor: ACCENT }} />
+          <div
+            style={{
+              display: "flex",
+              width: 120,
+              height: 4,
+              backgroundColor: ACCENT,
+            }}
+          />
           <div
             style={{
               marginTop: 24,
@@ -90,6 +97,6 @@ export default function OpengraphImage() {
         </div>
       </div>
     ),
-    { ...size },
+    { ...size }
   );
 }

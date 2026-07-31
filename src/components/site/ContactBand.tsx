@@ -1,11 +1,18 @@
 import Link from "next/link";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { LionWatermark } from "./LionWatermark";
+import { Reticle } from "./Reticle";
 import { SITE } from "@/lib/site";
 
 export function ContactBand() {
   return (
-    <section className="grain vignette relative overflow-hidden border-t border-border bg-surface">
+    <section className="grain vignette ambient-red relative overflow-hidden border-t border-border bg-surface">
+      <LionWatermark
+        className="right-[-8%] top-1/2 hidden w-[520px] -translate-y-1/2 lg:block"
+        opacity={0.05}
+      />
+      <Reticle tone="accent" inset="clamp(1rem, 3vw, 2.5rem)" className="hidden md:block" />
       <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
         <div className="grid gap-16 md:grid-cols-[1.2fr_1fr] md:items-end">
           <div>

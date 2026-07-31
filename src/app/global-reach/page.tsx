@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Globe2, PlaneTakeoff, Users, MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-night-city.webp";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
+import { HeroBackdrop } from "@/components/site/HeroBackdrop";
+import { LionWatermark } from "@/components/site/LionWatermark";
+import { GlobeGraticule } from "@/components/site/GlobeGraticule";
 
 const STATES = [
   { code: "QLD", name: "Queensland" },
@@ -55,23 +56,7 @@ export default function GlobalReach() {
       <Header />
       <main id="main">
         <section className="grain vignette relative min-h-[68svh] overflow-hidden">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(14,16,19,0.62) 0%, rgba(14,16,19,0.8) 55%, rgba(14,16,19,0.98) 100%)",
-            }}
-            aria-hidden
-          />
+          <HeroBackdrop />
           <div className="relative z-10 mx-auto flex min-h-[68svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-40 md:pb-28">
             <span className="eyebrow mb-6">Global Reach</span>
             <h1 className="max-w-[24ch] font-serif text-[40px] leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-[64px]">
@@ -123,7 +108,11 @@ export default function GlobalReach() {
         </section>
 
         {/* Lead use case */}
-        <section className="grain border-t border-border bg-surface">
+        <section className="grain ambient-red relative overflow-hidden border-t border-border bg-surface">
+          <LionWatermark
+            className="right-[-8%] top-1/2 hidden w-[520px] -translate-y-1/2 lg:block"
+            opacity={0.05}
+          />
           <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1.1fr_1fr] md:items-start">
               <div>
@@ -199,6 +188,10 @@ export default function GlobalReach() {
                     Licensed to operate directly in five Australian states and
                     territories.
                   </h2>
+                  <div className="relative mx-auto mt-12 hidden w-full max-w-[300px] md:block">
+                    <div className="scope-rings pointer-events-none absolute inset-[-12%] z-0 opacity-60" aria-hidden />
+                    <GlobeGraticule className="relative z-10 text-border" />
+                  </div>
                 </div>
                 <div>
                   <p className="max-w-[58ch] text-base leading-relaxed text-text-mute">
