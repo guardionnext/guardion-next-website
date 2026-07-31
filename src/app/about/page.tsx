@@ -7,6 +7,7 @@ import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
 import { HeroBackdrop } from "@/components/site/HeroBackdrop";
 import { LionWatermark } from "@/components/site/LionWatermark";
+import { FounderPortrait } from "@/components/site/FounderPortrait";
 import { SITE } from "@/lib/site";
 
 const VALUES = [
@@ -124,7 +125,7 @@ export default function About() {
         <section className="border-t border-border bg-background">
           <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
-              <div>
+              <div className="md:sticky md:top-28 md:self-start">
                 <span className="eyebrow mb-6">Founder</span>
                 <h2 className="mt-6 max-w-[16ch] font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
                   James McKelliff.
@@ -132,6 +133,12 @@ export default function About() {
                 <p className="mt-4 text-sm uppercase tracking-[0.18em] text-text-mute">
                   Founder &amp; Principal
                 </p>
+                <FounderPortrait
+                  src="/founder.webp"
+                  alt="James McKelliff, Founder and Principal of Guardion"
+                  caption="Ronin SA–certified · ADF veteran"
+                  className="mt-10"
+                />
               </div>
               <div className="max-w-[64ch] space-y-6 text-base leading-relaxed text-text-mute md:text-[17px]">
                 <p>
