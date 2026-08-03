@@ -3,7 +3,7 @@ export const SITE = {
   legalName: "Specialist Protection & Investigations Pty Ltd",
   abn: "74 683 697 716",
   tagline: "Specialist Protection & Investigations",
-  positioning: "Protection & Intelligence — end to end.",
+  positioning: "Protection & Intelligence — end to end. Test",
   url: "https://guardion.com.au",
   phone: "+61 401 207 060",
   phoneHref: "tel:+61401207060",
@@ -32,31 +32,37 @@ export const SERVICES = [
   {
     slug: "close-protection",
     title: "Close Protection",
-    summary: "Discreet, embedded protection for principals in daily life and high-risk moments.",
+    summary:
+      "Discreet, embedded protection for principals in daily life and high-risk moments.",
   },
   {
     slug: "executive-protection",
     title: "Executive Protection",
-    summary: "Coordinated security for executives across travel, meetings and public appearances.",
+    summary:
+      "Coordinated security for executives across travel, meetings and public appearances.",
   },
   {
     slug: "residential-security",
     title: "Residential Security",
-    summary: "Layered protection of the home — assessment, hardening and standing guard.",
+    summary:
+      "Layered protection of the home — assessment, hardening and standing guard.",
   },
   {
     slug: "security-driving",
     title: "Security Driving",
-    summary: "Trained protective drivers and vetted vehicles for principals and families.",
+    summary:
+      "Trained protective drivers and vetted vehicles for principals and families.",
   },
   {
     slug: "investigations",
     title: "Investigations",
-    summary: "Lawful, court-admissible enquiries handled with absolute confidentiality.",
+    summary:
+      "Lawful, court-admissible enquiries handled with absolute confidentiality.",
   },
   {
     slug: "tailored-security",
     title: "Tailored Security",
-    summary: "Bespoke programs for events, sensitive transitions and unique threat pictures.",
+    summary:
+      "Bespoke programs for events, sensitive transitions and unique threat pictures.",
   },
 ] as const;
