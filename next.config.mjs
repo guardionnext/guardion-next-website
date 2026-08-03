@@ -9,10 +9,6 @@ const nextConfig = {
   },
 
   experimental: {
-    // Inline the CSS into the HTML <head> instead of a render-blocking
-    // stylesheet request — removes the ~300ms render-blocking cost and the
-    // white flash before first paint on slow mobile connections.
-    inlineCss: true,
     // Ensure lucide-react is imported per-icon (tree-shaken), trimming JS.
     optimizePackageImports: ["lucide-react"],
   },
