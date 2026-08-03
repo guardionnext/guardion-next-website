@@ -25,9 +25,17 @@ export function Logo({
       <Image
         src={src}
         alt="Guardion"
-        width={1024}
-        height={314}
+        // Intrinsic size = the largest the logo ever renders (header h-12 ≈ 157×48).
+        // The source webp is 1024×314; declaring that made next/image emit a
+        // w=2048 srcset entry that the browser fetched (~20 KB) for a 157px slot.
+        // Sizing it honestly caps the srcset at w=256/384 with no visible change.
+        width={157}
+        height={48}
         priority={priority}
+        // In Next 15.5 `priority` no longer implies fetchPriority, so the LCP
+        // logo's preload link shipped without fetchpriority="high" (Lighthouse
+        // "LCP request discovery" flagged this). Set it explicitly when priority.
+        fetchPriority={priority ? "high" : undefined}
         className={imgClassName}
       />
     </Link>
