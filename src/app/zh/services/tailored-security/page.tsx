@@ -3,7 +3,7 @@ import { ServicePage, buildServiceJsonLd } from "@/components/site/ServicePage";
 import { getServiceContent, buildServiceMetadata } from "@/lib/content/services";
 
 const slug = "tailored-security";
-const locale = "en" as const;
+const locale = "zh-Hans" as const;
 
 export const metadata: Metadata = buildServiceMetadata(slug, locale);
 

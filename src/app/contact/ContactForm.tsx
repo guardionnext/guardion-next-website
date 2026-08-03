@@ -12,7 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SITE, SERVICES } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { type Locale } from "@/lib/i18n";
+import { getContactContent } from "@/lib/content/contact";
+import { getServices } from "@/lib/content/ui";
 
 interface FormData {
   name: string;
@@ -34,15 +37,13 @@ const INITIAL_DATA: FormData = {
   website: "",
 };
 
-const ERRORS = {
-  name: "Please enter your name.",
-  email: "Please enter a valid email address.",
-  phone: "Please enter a phone number.",
-  service: "Please select a service.",
-  message: "Please enter a brief message.",
-};
+export function ContactForm({ locale = "en" }: { locale?: Locale }) {
+  const t = getContactContent(locale).form;
+  // Stable English service titles are submitted (what the firm reads in the
+  // enquiry email); the localized title is only the visible label.
+  const enServices = getServices("en");
+  const localizedServices = getServices(locale);
 
-export function ContactForm() {
   const [form, setForm] = useState<FormData>(INITIAL_DATA);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -59,11 +60,11 @@ export function ContactForm() {
 
   const validate = (): boolean => {
     const next: Partial<Record<keyof FormData, string>> = {};
-    if (!form.name.trim()) next.name = ERRORS.name;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) next.email = ERRORS.email;
-    if (!form.phone.trim()) next.phone = ERRORS.phone;
-    if (!form.service) next.service = ERRORS.service;
-    if (!form.message.trim()) next.message = ERRORS.message;
+    if (!form.name.trim()) next.name = t.errors.name;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) next.email = t.errors.email;
+    if (!form.phone.trim()) next.phone = t.errors.phone;
+    if (!form.service) next.service = t.errors.service;
+    if (!form.message.trim()) next.message = t.errors.message;
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -91,19 +92,14 @@ export function ContactForm() {
           | { error?: string; errors?: Partial<Record<keyof FormData, string>> }
           | null;
         if (data?.errors) setErrors((prev) => ({ ...prev, ...data.errors }));
-        setSubmitError(
-          data?.error ??
-            "Something went wrong sending your enquiry. Please try again, or call us directly.",
-        );
+        setSubmitError(data?.error ?? t.submitErrorGeneric);
         return;
       }
 
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
-      setSubmitError(
-        "We couldn't reach the server. Please check your connection and try again, or call us directly.",
-      );
+      setSubmitError(t.submitErrorNetwork);
     } finally {
       setSubmitting(false);
     }
@@ -111,13 +107,12 @@ export function ContactForm() {
 
   return (
     <div>
-      <span className="eyebrow mb-6">Enquiry form</span>
+      <span className="eyebrow mb-6">{t.eyebrow}</span>
       <h2 className="mt-6 font-serif text-4xl leading-[1.05] text-foreground md:text-[44px]">
-        Send a confidential enquiry.
+        {t.heading}
       </h2>
       <p className="mt-6 max-w-[56ch] text-base leading-relaxed text-text-mute">
-        Tell us briefly what you need. A principal of the firm will respond directly,
-        usually within one business day. Every enquiry is handled in strict confidence.
+        {t.intro}
       </p>
 
       {submitted ? (
@@ -128,12 +123,10 @@ export function ContactForm() {
             </div>
             <div>
               <h3 className="font-serif text-2xl text-foreground">
-                Thank you. We will be in touch shortly.
+                {t.success.title}
               </h3>
               <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-text-mute">
-                Your enquiry has been sent. A principal of the firm will respond
-                directly, usually within one business day. To reach us sooner, please
-                call or message directly.
+                {t.success.body}
               </p>
               <a
                 href={SITE.phoneHref}
@@ -150,11 +143,11 @@ export function ContactForm() {
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name">
-                Name{" "}
+                {t.labels.name}{" "}
                 <span className="text-accent" aria-hidden>
                   *
                 </span>
-                <span className="sr-only">(required)</span>
+                <span className="sr-only">{t.required}</span>
               </Label>
               <Input
                 id="name"
@@ -165,7 +158,7 @@ export function ContactForm() {
                 onChange={(e) => update("name", e.target.value)}
                 aria-invalid={!!errors.name}
                 aria-describedby={errors.name ? "name-error" : undefined}
-                placeholder="Your full name"
+                placeholder={t.placeholders.name}
                 className="h-12 bg-surface"
               />
               {errors.name && (
@@ -177,11 +170,11 @@ export function ContactForm() {
 
             <div className="space-y-2">
               <Label htmlFor="email">
-                Email{" "}
+                {t.labels.email}{" "}
                 <span className="text-accent" aria-hidden>
                   *
                 </span>
-                <span className="sr-only">(required)</span>
+                <span className="sr-only">{t.required}</span>
               </Label>
               <Input
                 id="email"
@@ -192,7 +185,7 @@ export function ContactForm() {
                 onChange={(e) => update("email", e.target.value)}
                 aria-invalid={!!errors.email}
                 aria-describedby={errors.email ? "email-error" : undefined}
-                placeholder="you@example.com"
+                placeholder={t.placeholders.email}
                 className="h-12 bg-surface"
               />
               {errors.email && (
@@ -206,11 +199,11 @@ export function ContactForm() {
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="phone">
-                Phone{" "}
+                {t.labels.phone}{" "}
                 <span className="text-accent" aria-hidden>
                   *
                 </span>
-                <span className="sr-only">(required)</span>
+                <span className="sr-only">{t.required}</span>
               </Label>
               <Input
                 id="phone"
@@ -221,7 +214,7 @@ export function ContactForm() {
                 onChange={(e) => update("phone", e.target.value)}
                 aria-invalid={!!errors.phone}
                 aria-describedby={errors.phone ? "phone-error" : undefined}
-                placeholder="+61 ..."
+                placeholder={t.placeholders.phone}
                 className="h-12 bg-surface"
               />
               {errors.phone && (
@@ -233,11 +226,11 @@ export function ContactForm() {
 
             <div className="space-y-2">
               <Label htmlFor="service">
-                Service{" "}
+                {t.labels.service}{" "}
                 <span className="text-accent" aria-hidden>
                   *
                 </span>
-                <span className="sr-only">(required)</span>
+                <span className="sr-only">{t.required}</span>
               </Label>
               <Select
                 value={form.service}
@@ -246,16 +239,16 @@ export function ContactForm() {
                 <SelectTrigger
                   id="service"
                   name="service"
-                  aria-label="Service of interest"
+                  aria-label={t.serviceAria}
                   aria-invalid={!!errors.service}
                   aria-describedby={errors.service ? "service-error" : undefined}
                   className="h-12 bg-surface"
                 >
-                  <SelectValue placeholder="Select a service" />
+                  <SelectValue placeholder={t.placeholders.service} />
                 </SelectTrigger>
                 <SelectContent>
-                  {SERVICES.map((s) => (
-                    <SelectItem key={s.slug} value={s.title}>
+                  {localizedServices.map((s, i) => (
+                    <SelectItem key={s.slug} value={enServices[i].title}>
                       {s.title}
                     </SelectItem>
                   ))}
@@ -270,25 +263,25 @@ export function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="location">Location / country of operation</Label>
+            <Label htmlFor="location">{t.labels.location}</Label>
             <Input
               id="location"
               name="location"
               type="text"
               value={form.location}
               onChange={(e) => update("location", e.target.value)}
-              placeholder="e.g. Sydney, Melbourne, London, Singapore"
+              placeholder={t.placeholders.location}
               className="h-12 bg-surface"
             />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="message">
-              Message{" "}
+              {t.labels.message}{" "}
               <span className="text-accent" aria-hidden>
                 *
               </span>
-              <span className="sr-only">(required)</span>
+              <span className="sr-only">{t.required}</span>
             </Label>
             <Textarea
               id="message"
@@ -297,7 +290,7 @@ export function ContactForm() {
               onChange={(e) => update("message", e.target.value)}
               aria-invalid={!!errors.message}
               aria-describedby={errors.message ? "message-error" : undefined}
-              placeholder="Describe your situation briefly, including any known risks, dates or locations."
+              placeholder={t.placeholders.message}
               className="min-h-[160px] bg-surface"
             />
             {errors.message && (
@@ -329,15 +322,14 @@ export function ContactForm() {
 
           <div className="flex flex-col items-start gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-[52ch] text-xs leading-relaxed text-text-mute">
-              Your enquiry is handled discreetly and in confidence. We do not share
-              identifying details, and we respond only to the channels you provide.
+              {t.privacyNote}
             </p>
             <button
               type="submit"
               disabled={submitting}
               className="inline-flex h-12 shrink-0 items-center border border-accent bg-accent px-6 text-sm font-medium text-white transition hover:bg-[#a91f26] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {submitting ? "Sending…" : "Send enquiry"}
+              {submitting ? t.submitting : t.submit}
             </button>
           </div>
         </form>

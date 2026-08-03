@@ -2,22 +2,36 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "./Logo";
-import { SITE, SERVICES } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import {
+  localePath,
+  localeLabel,
+  stripLocale,
+  isTranslated,
+  ZH_READY,
+  type Locale,
+} from "@/lib/i18n";
+import { getUI, getServices } from "@/lib/content/ui";
 
-const NAV = [
-  { to: "/global-reach", label: "Global Reach" },
-  { to: "/about", label: "About" },
-  { to: "/our-work", label: "Our Work" },
-  { to: "/blog", label: "Blog" },
-  { to: "/contact", label: "Contact" },
-] as const;
-
-export function Header() {
+export function Header({ locale = "en" }: { locale?: Locale }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+
+  const t = getUI(locale);
+  const services = getServices(locale);
+  const lp = (path: string) => localePath(locale, path);
+
+  const nav = [
+    { to: "/global-reach", label: t.nav.globalReach },
+    { to: "/about", label: t.nav.about },
+    { to: "/our-work", label: t.nav.ourWork },
+    { to: "/blog", label: t.nav.blog },
+    { to: "/contact", label: t.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -47,6 +61,7 @@ export function Header() {
       >
         <Logo
           priority
+          locale={locale}
           imgClassName={`w-auto shrink-0 transition-all duration-300 ${
             scrolled ? "h-10" : "h-12"
           }`}
@@ -63,7 +78,7 @@ export function Header() {
               aria-expanded={servicesOpen}
               aria-haspopup="menu"
             >
-              Services
+              {t.header.services}
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
             {servicesOpen && (
@@ -73,16 +88,16 @@ export function Header() {
               >
                 <div className="grid grid-cols-1 gap-1 border border-border bg-surface p-3 shadow-2xl">
                   <Link
-                    href="/services"
+                    href={lp("/services")}
                     className="flex items-center justify-between border-b border-border px-3 py-2 text-sm text-foreground/85 hover:text-foreground"
                   >
-                    <span className="eyebrow">Overview</span>
-                    <span className="text-xs text-text-mute">All services →</span>
+                    <span className="eyebrow">{t.header.overview}</span>
+                    <span className="text-xs text-text-mute">{t.header.allServicesArrow} →</span>
                   </Link>
-                  {SERVICES.map((s) => (
+                  {services.map((s) => (
                     <Link
                       key={s.slug}
-                      href={`/services/${s.slug}`}
+                      href={lp(`/services/${s.slug}`)}
                       className="group flex items-start gap-3 px-3 py-2.5 transition hover:bg-surface-2"
                     >
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden />
@@ -96,10 +111,10 @@ export function Header() {
               </div>
             )}
           </div>
-          {NAV.map((n) => (
+          {nav.map((n) => (
             <Link
               key={n.to}
-              href={n.to}
+              href={lp(n.to)}
               className="text-sm text-foreground/85 transition hover:text-foreground"
             >
               {n.label}
@@ -108,25 +123,26 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
+          <LanguageSwitcher current={locale} />
           <a
             href={SITE.phoneHref}
             className="group inline-flex items-center gap-2 text-sm text-foreground/85 transition hover:text-foreground"
           >
             <Phone className="h-3.5 w-3.5 text-accent" aria-hidden />
             <span className="tabular-nums">{SITE.phone}</span>
-            <span className="text-[10px] uppercase tracking-[0.18em] text-text-mute">24hr</span>
+            <span className="text-[10px] uppercase tracking-[0.18em] text-text-mute">{t.header.hr24}</span>
           </a>
           <Link
-            href="/contact"
+            href={lp("/contact")}
             className="inline-flex h-10 items-center border border-accent bg-accent px-5 text-sm font-medium text-white transition hover:bg-[#a91f26]"
           >
-            Confidential Consultation
+            {t.header.consultation}
           </Link>
         </div>
 
         <button
           className="inline-flex h-10 w-10 items-center justify-center border border-border text-foreground lg:hidden"
-          aria-label="Open menu"
+          aria-label={t.header.openMenu}
           aria-expanded={open}
           onClick={() => setOpen(true)}
         >
@@ -141,30 +157,30 @@ export function Header() {
       {open && (
         <div className="fixed inset-0 z-[60] flex flex-col bg-background lg:hidden">
           <div className="flex h-20 items-center justify-between border-b border-border px-6">
-            <Logo />
+            <Logo locale={locale} />
             <button
               onClick={() => setOpen(false)}
               className="inline-flex h-10 w-10 items-center justify-center border border-border"
-              aria-label="Close menu"
+              aria-label={t.header.closeMenu}
             >
               <X className="h-5 w-5" />
             </button>
           </div>
           <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-6 py-8">
             <div className="mb-6">
-              <div className="eyebrow mb-4">Services</div>
+              <div className="eyebrow mb-4">{t.header.services}</div>
               <div className="flex flex-col divide-y divide-border border-y border-border">
                 <Link
-                  href="/services"
+                  href={lp("/services")}
                   onClick={() => setOpen(false)}
                   className="py-3 text-base text-foreground"
                 >
-                  All services
+                  {t.header.allServices}
                 </Link>
-                {SERVICES.map((s) => (
+                {services.map((s) => (
                   <Link
                     key={s.slug}
-                    href={`/services/${s.slug}`}
+                    href={lp(`/services/${s.slug}`)}
                     onClick={() => setOpen(false)}
                     className="py-3 text-base text-foreground"
                   >
@@ -174,10 +190,10 @@ export function Header() {
               </div>
             </div>
             <div className="flex flex-col divide-y divide-border border-y border-border">
-              {NAV.map((n) => (
+              {nav.map((n) => (
                 <Link
                   key={n.to}
-                  href={n.to}
+                  href={lp(n.to)}
                   onClick={() => setOpen(false)}
                   className="py-4 font-serif text-xl text-foreground"
                 >
@@ -186,12 +202,15 @@ export function Header() {
               ))}
             </div>
             <Link
-              href="/contact"
+              href={lp("/contact")}
               onClick={() => setOpen(false)}
               className="mt-8 inline-flex w-full items-center justify-center border border-accent bg-accent px-5 py-3 text-sm font-medium text-white"
             >
-              Confidential Consultation
+              {t.header.consultation}
             </Link>
+            <div className="mt-8">
+              <LanguageSwitcher current={locale} onNavigate={() => setOpen(false)} />
+            </div>
           </nav>
           <a
             href={SITE.phoneHref}
@@ -199,10 +218,55 @@ export function Header() {
           >
             <Phone className="h-4 w-4 text-accent" aria-hidden />
             <span className="tabular-nums">{SITE.phone}</span>
-            <span className="text-[10px] uppercase tracking-[0.18em] text-text-mute">24hr</span>
+            <span className="text-[10px] uppercase tracking-[0.18em] text-text-mute">{t.header.hr24}</span>
           </a>
         </div>
       )}
     </>
+  );
+}
+
+/**
+ * EN / 中文 switcher. Hidden until ZH_READY so the live English site is
+ * unchanged while translations are still being written. Links to the same page
+ * in the other locale by rewriting the current pathname's locale prefix.
+ */
+function LanguageSwitcher({
+  current,
+  onNavigate,
+}: {
+  current: Locale;
+  onNavigate?: () => void;
+}) {
+  const pathname = usePathname() || "/";
+  if (!ZH_READY) return null;
+
+  const { path } = stripLocale(pathname);
+  // No switcher on English-only sections (e.g. the blog) — there's no zh page.
+  if (!isTranslated(path)) return null;
+  const options: Locale[] = ["en", "zh-Hans"];
+
+  return (
+    <div className="inline-flex items-center gap-1 text-xs" aria-label="Language">
+      {options.map((loc, i) => (
+        <span key={loc} className="inline-flex items-center">
+          {i > 0 && <span className="mx-1 text-border" aria-hidden>·</span>}
+          {loc === current ? (
+            <span className="font-medium text-foreground" aria-current="true">
+              {localeLabel[loc]}
+            </span>
+          ) : (
+            <Link
+              href={localePath(loc, path)}
+              hrefLang={loc === "en" ? "en-AU" : "zh-Hans"}
+              onClick={onNavigate}
+              className="text-text-mute transition hover:text-foreground"
+            >
+              {localeLabel[loc]}
+            </Link>
+          )}
+        </span>
+      ))}
+    </div>
   );
 }

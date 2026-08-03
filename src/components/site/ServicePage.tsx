@@ -6,7 +6,9 @@ import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
 import { HeroBackdrop } from "@/components/site/HeroBackdrop";
 import { LionWatermark } from "@/components/site/LionWatermark";
-import { SERVICES, SITE } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { localePath, type Locale } from "@/lib/i18n";
+import { getUI, getServices } from "@/lib/content/ui";
 
 export type ServiceStep = { title: string; body: string };
 
@@ -29,27 +31,37 @@ export type ServiceContent = {
   closingNote?: string;
 };
 
-export function ServicePage({ content }: { content: ServiceContent }) {
-  const related = SERVICES.filter((s) => s.slug !== content.slug).slice(0, 3);
+export function ServicePage({
+  content,
+  locale = "en",
+}: {
+  content: ServiceContent;
+  locale?: Locale;
+}) {
+  const t = getUI(locale).service;
+  const lp = (path: string) => localePath(locale, path);
+  const related = getServices(locale)
+    .filter((s) => s.slug !== content.slug)
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildServiceBreadcrumbJsonLd(content)),
+          __html: JSON.stringify(buildServiceBreadcrumbJsonLd(content, locale)),
         }}
       />
-      <Header />
+      <Header locale={locale} />
       <main id="main">
         {/* Hero */}
         <section className="grain vignette relative min-h-[72svh] overflow-hidden">
           <HeroBackdrop />
           <div className="relative z-10 mx-auto flex min-h-[72svh] max-w-[1280px] flex-col justify-end px-6 pb-20 pt-40 md:pb-28">
             <nav aria-label="Breadcrumb" className="rise mb-8 text-[10px] uppercase tracking-[0.22em] text-text-mute">
-              <Link href="/services" className="transition hover:text-foreground">Services</Link>
+              <Link href={lp("/services")} className="transition hover:text-foreground">{t.breadcrumbServices}</Link>
               <span className="mx-3 text-border">/</span>
-              <span className="text-foreground/80">{content.eyebrow ?? "Capability"}</span>
+              <span className="text-foreground/80">{content.eyebrow ?? content.title}</span>
             </nav>
             <h1 className="rise max-w-[22ch] font-serif text-[40px] leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-[64px]">
               {content.title}
@@ -65,7 +77,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
               <div>
-                <span className="eyebrow mb-6">What it covers</span>
+                <span className="eyebrow mb-6">{t.covers}</span>
                 <h2 className="mt-6 max-w-[18ch] font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
                   {content.coversHeading}
                 </h2>
@@ -97,16 +109,16 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           />
           <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="max-w-[52ch]">
-              <span className="eyebrow mb-6">How we work</span>
+              <span className="eyebrow mb-6">{t.howWeWork}</span>
               <h2 className="mt-6 font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
-                {content.howHeading ?? "A rehearsed, unhurried process."}
+                {content.howHeading ?? t.defaultHowHeading}
               </h2>
             </div>
             <ol className="mt-16 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
               {content.steps.map((step, i) => (
                 <li key={step.title} className="bg-surface p-8 md:p-10">
                   <div className="text-[10px] uppercase tracking-[0.22em] text-text-mute tabular-nums">
-                    Step 0{i + 1}
+                    {t.step} 0{i + 1}
                   </div>
                   <h3 className="mt-6 font-serif text-xl text-foreground">{step.title}</h3>
                   <p className="mt-4 text-sm leading-relaxed text-text-mute">{step.body}</p>
@@ -121,9 +133,9 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="grid gap-16 md:grid-cols-[1fr_1.6fr]">
               <div>
-                <span className="eyebrow mb-6">Who it's for</span>
+                <span className="eyebrow mb-6">{t.whoItsFor}</span>
                 <h2 className="mt-6 max-w-[20ch] font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
-                  {content.whoHeading ?? "Fitted to the principal, not the brochure."}
+                  {content.whoHeading ?? t.defaultWhoHeading}
                 </h2>
               </div>
               <div className="max-w-[64ch] text-base leading-relaxed text-text-mute md:text-[17px]">
@@ -149,7 +161,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
             <div className="border border-border bg-surface p-10 md:p-14">
               <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-text-mute">
                 <span className="h-2 w-2 bg-accent" aria-hidden />
-                {content.exampleLabel ?? "Anonymised example"}
+                {content.exampleLabel ?? t.anonymisedExample}
               </div>
               <h3 className="mt-6 max-w-[36ch] font-serif text-2xl leading-[1.15] text-foreground md:text-3xl">
                 {content.exampleTitle}
@@ -171,16 +183,16 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           <Reveal className="mx-auto max-w-[1280px] px-6 py-24 md:py-32">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
-                <span className="eyebrow mb-6">Related capabilities</span>
+                <span className="eyebrow mb-6">{t.relatedCapabilities}</span>
                 <h2 className="mt-6 max-w-[24ch] font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
-                  Often engaged alongside this service.
+                  {t.relatedHeading}
                 </h2>
               </div>
               <Link
-                href="/services"
+                href={lp("/services")}
                 className="inline-flex items-center gap-2 text-sm text-foreground/85 transition hover:text-foreground"
               >
-                All services
+                {t.allServices}
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
@@ -188,7 +200,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
               {related.map((s) => (
                 <Link
                   key={s.slug}
-                  href={`/services/${s.slug}`}
+                  href={lp(`/services/${s.slug}`)}
                   className="group flex flex-col justify-between bg-surface p-8 transition duration-300 hover:bg-surface-2 md:p-10"
                 >
                   <div>
@@ -199,7 +211,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
                   </div>
                   <div className="mt-10 flex items-center justify-between">
                     <span className="text-xs uppercase tracking-[0.18em] text-text-mute transition group-hover:text-foreground">
-                      Read more
+                      {t.readMore}
                     </span>
                     <ArrowUpRight className="h-5 w-5 text-text-mute transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
                   </div>
@@ -209,14 +221,14 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           </Reveal>
         </section>
 
-        <ContactBand />
+        <ContactBand locale={locale} />
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </div>
   );
 }
 
-export function buildServiceJsonLd(content: ServiceContent) {
+export function buildServiceJsonLd(content: ServiceContent, locale: Locale = "en") {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -232,22 +244,27 @@ export function buildServiceJsonLd(content: ServiceContent) {
       { "@type": "Place", name: "International — coordinated through vetted partners" },
     ],
     description: content.promise,
-    url: `${SITE.url}/services/${content.slug}`,
+    url: `${SITE.url}${localePath(locale, `/services/${content.slug}`)}`,
+    inLanguage: locale === "en" ? "en-AU" : "zh-Hans",
   };
 }
 
-export function buildServiceBreadcrumbJsonLd(content: ServiceContent) {
+export function buildServiceBreadcrumbJsonLd(
+  content: ServiceContent,
+  locale: Locale = "en"
+) {
+  const t = getUI(locale).service;
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Services", item: `${SITE.url}/services` },
+      { "@type": "ListItem", position: 1, name: t.home, item: `${SITE.url}${localePath(locale, "/")}` },
+      { "@type": "ListItem", position: 2, name: t.breadcrumbServices, item: `${SITE.url}${localePath(locale, "/services")}` },
       {
         "@type": "ListItem",
         position: 3,
         name: content.title,
-        item: `${SITE.url}/services/${content.slug}`,
+        item: `${SITE.url}${localePath(locale, `/services/${content.slug}`)}`,
       },
     ],
   };

@@ -10,6 +10,10 @@ export const SITE = {
   email: "info@guardion.com.au",
   whatsapp: "https://wa.me/61401207060",
   signal: "https://signal.me/#p/+61401207060",
+  // TODO: replace placeholder with Guardion's real WeChat ID, and add the QR
+  // image at /public/wechat-qr.webp. Used for Chinese-speaking / Greater China
+  // clients who prefer WeChat over WhatsApp/Signal.
+  wechat: "GuardionAU",
   social: {
     facebook: "https://facebook.com/",
     instagram: "https://instagram.com/",

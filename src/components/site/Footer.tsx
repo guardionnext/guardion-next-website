@@ -2,19 +2,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, Phone, Mail } from "lucide-react";
 import { Logo } from "./Logo";
-import { SITE, SERVICES } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { localePath, type Locale } from "@/lib/i18n";
+import { getUI, getServices } from "@/lib/content/ui";
 
-export function Footer() {
+export function Footer({ locale = "en" }: { locale?: Locale }) {
+  const t = getUI(locale);
+  const services = getServices(locale);
+  const lp = (path: string) => localePath(locale, path);
+
+  const firmLinks: [string, string][] = [
+    ["/about", t.footer.links.about],
+    ["/global-reach", t.footer.links.globalReach],
+    ["/our-work", t.footer.links.ourWork],
+    ["/blog", t.footer.links.blog],
+    ["/contact", t.footer.links.contact],
+    ["/privacy", t.footer.links.privacy],
+    ["/terms", t.footer.links.terms],
+  ];
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-[1280px] px-6 py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Logo variant="white" />
+            <Logo variant="white" locale={locale} />
             <p className="mt-6 max-w-[32ch] text-sm leading-relaxed text-text-mute">
-              {SITE.tagline}. An Australian firm providing close protection and
-              private investigations for individuals and organisations, at home
-              and abroad.
+              {t.footer.tagline}. {t.footer.blurb}
             </p>
             <div className="mt-8 flex items-center gap-3">
               <a
@@ -41,7 +55,7 @@ export function Footer() {
             </div>
             <Image
               src="/aus_veteran_owned_business.webp"
-              alt="Australian Veteran Owned Business"
+              alt={t.footer.veteranAlt}
               width={1450}
               height={1536}
               className="mt-10 h-20 w-auto"
@@ -49,12 +63,12 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <span className="eyebrow mb-6">Services</span>
+            <span className="eyebrow mb-6">{t.footer.servicesHeading}</span>
             <ul className="mt-6 space-y-3 text-sm">
-              {SERVICES.map((s) => (
+              {services.map((s) => (
                 <li key={s.slug}>
                   <Link
-                    href={`/services/${s.slug}`}
+                    href={lp(`/services/${s.slug}`)}
                     className="text-text-mute transition hover:text-foreground"
                   >
                     {s.title}
@@ -65,20 +79,12 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3">
-            <span className="eyebrow mb-6">Firm</span>
+            <span className="eyebrow mb-6">{t.footer.firmHeading}</span>
             <ul className="mt-6 space-y-3 text-sm">
-              {[
-                ["/about", "About"],
-                ["/global-reach", "Global Reach"],
-                ["/our-work", "Our Work"],
-                ["/blog", "Blog"],
-                ["/contact", "Contact"],
-                ["/privacy", "Privacy"],
-                ["/terms", "Terms"],
-              ].map(([href, label]) => (
+              {firmLinks.map(([href, label]) => (
                 <li key={href}>
                   <Link
-                    href={href}
+                    href={lp(href)}
                     className="text-text-mute transition hover:text-foreground"
                   >
                     {label}
@@ -89,7 +95,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3">
-            <span className="eyebrow mb-6">Contact</span>
+            <span className="eyebrow mb-6">{t.footer.contactHeading}</span>
             <ul className="mt-6 space-y-3 text-sm">
               <li>
                 <a
@@ -100,7 +106,7 @@ export function Footer() {
                   <span className="tabular-nums">{SITE.phone}</span>
                 </a>
                 <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-text-mute">
-                  24 hour response
+                  {t.footer.response24}
                 </div>
               </li>
               <li>
@@ -118,7 +124,7 @@ export function Footer() {
 
         {/* Credentials strip */}
         <div className="mt-16 border-t border-border pt-8">
-          <span className="eyebrow">Licensing</span>
+          <span className="eyebrow">{t.footer.licensingHeading}</span>
           <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-5">
             {SITE.licences.map((l) => (
               <div key={l.state} className="border-l border-border pl-3">
@@ -136,18 +142,15 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-8 text-xs text-text-mute md:flex-row md:items-center">
           <div className="space-y-1">
             <p>
-              © {new Date().getFullYear()} {SITE.legalName}. All rights
-              reserved.
+              © {new Date().getFullYear()} {SITE.legalName}. {t.footer.rights}
             </p>
             <p>
-              Trading as Guardion · ABN{" "}
+              {t.footer.tradingAs}{" "}
               <span className="tabular-nums">{SITE.abn}</span>
             </p>
           </div>
           <p className="max-w-[52ch] md:text-right">
-            Guardion operates in accordance with Australian security industry
-            law. International engagements are coordinated through vetted local
-            partners, within local jurisdiction.
+            {t.footer.legalNote}
           </p>
         </div>
       </div>

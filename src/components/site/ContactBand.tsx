@@ -4,8 +4,11 @@ import { Reveal } from "./Reveal";
 import { LionWatermark } from "./LionWatermark";
 import { Reticle } from "./Reticle";
 import { SITE } from "@/lib/site";
+import { localePath, type Locale } from "@/lib/i18n";
+import { getUI } from "@/lib/content/ui";
 
-export function ContactBand() {
+export function ContactBand({ locale = "en" }: { locale?: Locale }) {
+  const t = getUI(locale).contactBand;
   return (
     <section className="grain vignette ambient-red relative overflow-hidden border-t border-border bg-surface">
       <LionWatermark
@@ -16,20 +19,19 @@ export function ContactBand() {
       <Reveal className="relative z-10 mx-auto max-w-[1280px] px-6 py-24 md:py-32">
         <div className="grid gap-16 md:grid-cols-[1.2fr_1fr] md:items-end">
           <div>
-            <span className="eyebrow mb-6">Speak with us</span>
+            <span className="eyebrow mb-6">{t.eyebrow}</span>
             <h2 className="mt-6 max-w-[16ch] font-serif text-4xl leading-[1.05] text-foreground md:text-5xl">
-              A quiet conversation. Nothing on the record.
+              {t.heading}
             </h2>
             <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-text-mute">
-              Every enquiry is handled by a principal of the firm. Share as much
-              or as little as you wish — we will listen first, then advise.
+              {t.body}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
-                href="/contact"
+                href={localePath(locale, "/contact")}
                 className="inline-flex h-12 items-center border border-accent bg-accent px-6 text-sm font-medium text-white transition hover:bg-[#a91f26]"
               >
-                Confidential Consultation
+                {t.consultation}
               </Link>
               <a
                 href={SITE.phoneHref}
@@ -37,13 +39,13 @@ export function ContactBand() {
               >
                 <Phone className="h-4 w-4 text-accent" aria-hidden />
                 <span className="tabular-nums">{SITE.phone}</span>
-                <span className="text-[10px] uppercase tracking-[0.18em] text-text-mute">24hr</span>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-text-mute">{t.hr24}</span>
               </a>
             </div>
           </div>
 
           <div className="border-t border-border pt-10 md:border-l md:border-t-0 md:pl-12 md:pt-0">
-            <span className="eyebrow mb-6">Direct channels</span>
+            <span className="eyebrow mb-6">{t.directChannels}</span>
             <ul className="mt-6 space-y-4 text-sm">
               <li>
                 <a
@@ -74,11 +76,16 @@ export function ContactBand() {
                   Signal
                 </a>
               </li>
+              <li>
+                <span className="inline-flex items-center gap-3 text-foreground/90">
+                  <MessageCircle className="h-4 w-4 text-text-mute" aria-hidden />
+                  WeChat · <span className="tracking-wide">{SITE.wechat}</span>
+                  <span lang="zh-Hans" className="text-text-mute">微信</span>
+                </span>
+              </li>
             </ul>
             <p className="mt-8 text-xs leading-relaxed text-text-mute">
-              Communications are handled discreetly. We do not disclose client
-              identities, itineraries or engagements — before, during or after
-              an assignment.
+              {t.discretionNote}
             </p>
           </div>
         </div>
