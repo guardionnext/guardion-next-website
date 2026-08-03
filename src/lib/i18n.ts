@@ -47,15 +47,18 @@ export const localeLabel: Record<Locale, string> = {
 };
 
 /**
- * Sections that exist in English only (no Chinese translation). Links to these
- * from the /zh tree resolve to the English URL, the language switcher hides on
- * them, and they get no hreflang / sitemap alternate.
+ * Sections whose *sub-paths* exist in English only. The blog index (/blog) is
+ * translated (/zh/blog), but individual articles (/blog/<slug>) are not — the
+ * long-form posts stay English. Links to an untranslated path from the /zh tree
+ * resolve to the English URL, the switcher hides on it, and it gets no
+ * hreflang / sitemap alternate.
  */
 export const untranslatedPrefixes = ["/blog"];
 
 /** True if `path` has (or will have) a Chinese counterpart under /zh. */
 export function isTranslated(path: string): boolean {
-  return !untranslatedPrefixes.some((p) => path === p || path.startsWith(`${p}/`));
+  // Match sub-paths only (e.g. "/blog/foo"), never the prefix itself ("/blog").
+  return !untranslatedPrefixes.some((p) => path.startsWith(`${p}/`));
 }
 
 /**

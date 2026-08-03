@@ -438,9 +438,9 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
   return POSTS.find((p) => p.slug === slug);
 }
 
-export function formatPostDate(iso: string): string {
+export function formatPostDate(iso: string, intlLocale = "en-AU"): string {
   const d = new Date(iso);
-  return d.toLocaleDateString("en-AU", {
+  return d.toLocaleDateString(intlLocale, {
     year: "numeric",
     month: "long",
     day: "numeric",
