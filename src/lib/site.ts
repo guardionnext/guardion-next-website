@@ -3,7 +3,7 @@ export const SITE = {
   legalName: "Specialist Protection & Investigations Pty Ltd",
   abn: "74 683 697 716",
   tagline: "Specialist Protection & Investigations",
-  positioning: "Protection & Intelligence — end to end. Test",
+  positioning: "Protection & Intelligence — end to end.",
   url: "https://guardion.com.au",
   phone: "+61 401 207 060",
   phoneHref: "tel:+61401207060",
