@@ -58,7 +58,6 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               alt={t.footer.veteranAlt}
               width={1450}
               height={1536}
-              sizes="80px"
               className="mt-10 h-20 w-auto"
             />
           </div>

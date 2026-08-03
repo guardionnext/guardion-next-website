@@ -28,7 +28,6 @@ export function Logo({
         width={1024}
         height={314}
         priority={priority}
-        sizes="200px"
         className={imgClassName}
       />
     </Link>

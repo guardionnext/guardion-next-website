@@ -17,7 +17,11 @@ export type AboutContent = {
     qualsHeading: string;
     quals: string[];
   };
-  values: { eyebrow: string; heading: string; items: { title: string; body: string }[] };
+  values: {
+    eyebrow: string;
+    heading: string;
+    items: { title: string; body: string }[];
+  };
   firm: { eyebrow: string; heading: string; body: string[] };
   credentials: { eyebrow: string; heading: string; body: string };
   affiliations: {
@@ -44,7 +48,7 @@ const en: AboutContent = {
       "Guardion is led by James McKelliff, who has spent more than eighteen years in protection and public-safety roles across military and civilian settings. He is a Ronin South Africa–certified close protection operator, trained to the FREC3 pre-hospital care standard and in firearms and advanced protective driving.",
       "From 2013 to 2021 he served with the Australian Defence Force in the Royal Australian Artillery, on an air-defence missile and radar team charged with protecting land forces. He qualified as a military driving instructor and combat-fitness leader, mentored incoming soldiers, and deployed on Operation Bushfire Assist. That grounding — readiness, planning and disciplined execution under pressure — still shapes how every Guardion task is prepared.",
       "His civilian career spans the full breadth of the industry: cash-in-transit and armoured work, crowd control and venue security, residential protection teams, and licensed private investigations conducted under instruction from law firms. He has led night-time security operations, run convoy movements with encrypted team communications, and built and supervised trusted protection details for private clients.",
-      "In recent years his work has moved into the private, high-end of the profession — discreet close protection for high-net-worth individuals and their families, VIPs, touring recording artists, political commentators and public figures, across international sport, motorsport and televised production. It is relentlessly international work: he has deployed on operations throughout Asia, Europe and the Americas — in practice, every corner of the globe — with the extensive travel such engagements demand. In keeping with the firm's first principle, the people he protects are never named.",
+      "In recent years his work has moved into the private, high-end of the profession — discreet close protection for high-net-worth individuals and their families, VIPs, touring recording artists, political commentators and public figures, across international sport, motorsport and televised production. In his relentless international work: he has deployed on operations throughout Asia, Europe and the Americas — in practice, every corner of the globe — with the extensive travel such engagements demand. In keeping with the firm's first principle, the people he protects are never named.",
       "He continues to formalise that experience academically. He is roughly halfway through a Bachelor of Global Security, majoring in terrorism and counter-terrorism, with completion expected in early 2028 — sharpening the threat assessment and planning discipline that underpins every Guardion engagement.",
       "His philosophy is straightforward. Good protection is boring on the outside and thoroughly rehearsed on the inside. Good investigations are patient, lawful, and worth standing behind in a courtroom. Neither is theatre. Both are, above all, a duty to the client.",
       "Every Guardion engagement is signed off by a principal of the firm. Clients speak to someone accountable — not a duty desk, not a rotating account manager.",
@@ -66,9 +70,18 @@ const en: AboutContent = {
     eyebrow: "Values",
     heading: "Three words we hold ourselves to.",
     items: [
-      { title: "Discretion", body: "Client identities, movements and engagements are never disclosed — before, during or after the work. Silence is part of the service." },
-      { title: "Precision", body: "Plans are written, rehearsed and reviewed. Nothing is improvised where preparation was possible." },
-      { title: "Professionalism", body: "Lawful, licensed, understated. Our operators represent the client in every room they enter and every street they cross." },
+      {
+        title: "Discretion",
+        body: "Client identities, movements and engagements are never disclosed — before, during or after the work. Silence is part of the service.",
+      },
+      {
+        title: "Precision",
+        body: "Plans are written, rehearsed and reviewed. Nothing is improvised where preparation was possible.",
+      },
+      {
+        title: "Professionalism",
+        body: "Lawful, licensed, understated. Our operators represent the client in every room they enter and every street they cross.",
+      },
     ],
   },
   firm: {
@@ -88,11 +101,18 @@ const en: AboutContent = {
   affiliations: {
     eyebrow: "Compliance & affiliations",
     heading: "Accountable to more than our clients.",
-    intro: "Guardion operates as an ethical member of the security and risk-management industry — compliant with the rules, regulations and legislation that govern it. We value our people and our clients, and respect the countries in which we work.",
+    intro:
+      "Guardion operates as an ethical member of the security and risk-management industry — compliant with the rules, regulations and legislation that govern it. We value our people and our clients, and respect the countries in which we work.",
     viewCertificate: "View certificate",
     items: [
-      { label: "Veteran support", body: "Guardion is a veteran-owned business, and we give back to the military community that shaped us. We are proud supporters of Soldier On — a not-for-profit delivering holistic support to current and former Australian Defence Force personnel and their families. Soldier On has featured our partnership in an article, reflecting the values we share with those who have served." },
-      { label: "Industry membership", body: "Guardion is a member of the Australian Security Industry Association Limited (ASIAL), the peak body for Australia's security profession. Membership holds us to ASIAL's standards of professionalism, integrity and compliance, and keeps us engaged with industry best practice through training, accreditation and regulatory engagement." },
+      {
+        label: "Veteran support",
+        body: "Guardion is a veteran-owned business, and we give back to the military community that shaped us. We are proud supporters of Soldier On — a not-for-profit delivering holistic support to current and former Australian Defence Force personnel and their families. Soldier On has featured our partnership in an article, reflecting the values we share with those who have served.",
+      },
+      {
+        label: "Industry membership",
+        body: "Guardion is a member of the Australian Security Industry Association Limited (ASIAL), the peak body for Australia's security profession. Membership holds us to ASIAL's standards of professionalism, integrity and compliance, and keeps us engaged with industry best practice through training, accreditation and regulatory engagement.",
+      },
     ],
   },
 };
@@ -134,9 +154,18 @@ const zhHans: AboutContent = {
     eyebrow: "价值观",
     heading: "我们恪守的三个词。",
     items: [
-      { title: "谨慎", body: "客户的身份、行踪与委托，无论在工作之前、之中还是之后，都绝不透露。缄默本身就是服务的一部分。" },
-      { title: "精准", body: "方案都经过书面拟定、演练与复盘。凡是可以事先准备的，绝不临场发挥。" },
-      { title: "专业", body: "合法、持牌、低调。我们的护卫人员，在踏入的每一个场合、走过的每一条街道，都代表着客户。" },
+      {
+        title: "谨慎",
+        body: "客户的身份、行踪与委托，无论在工作之前、之中还是之后，都绝不透露。缄默本身就是服务的一部分。",
+      },
+      {
+        title: "精准",
+        body: "方案都经过书面拟定、演练与复盘。凡是可以事先准备的，绝不临场发挥。",
+      },
+      {
+        title: "专业",
+        body: "合法、持牌、低调。我们的护卫人员，在踏入的每一个场合、走过的每一条街道，都代表着客户。",
+      },
     ],
   },
   firm: {
@@ -156,11 +185,18 @@ const zhHans: AboutContent = {
   affiliations: {
     eyebrow: "合规与会员资格",
     heading: "我们负责的对象，不止是客户。",
-    intro: "Guardion 作为安保与风险管理行业中恪守操守的一员运营——遵守规范该行业的各项规则、法规与法律。我们珍视自己的团队与客户，并尊重我们开展工作的每一个国家。",
+    intro:
+      "Guardion 作为安保与风险管理行业中恪守操守的一员运营——遵守规范该行业的各项规则、法规与法律。我们珍视自己的团队与客户，并尊重我们开展工作的每一个国家。",
     viewCertificate: "查看证书",
     items: [
-      { label: "退伍军人支持", body: "Guardion 是一家退伍军人所有的企业，我们回馈塑造了我们的军人群体。我们自豪地支持 Soldier On——一家为现役与退役澳大利亚国防军人员及其家人提供全方位支持的非营利机构。Soldier On 曾在一篇文章中报道我们的合作，正体现了我们与曾经服役者所共有的价值观。" },
-      { label: "行业会员", body: "Guardion 是澳大利亚安保行业协会（ASIAL）的会员，该协会是澳大利亚安保行业的最高行业机构。会员身份使我们恪守 ASIAL 在专业、诚信与合规方面的标准，并通过培训、认证与监管互动，让我们持续紧跟行业最佳实践。" },
+      {
+        label: "退伍军人支持",
+        body: "Guardion 是一家退伍军人所有的企业，我们回馈塑造了我们的军人群体。我们自豪地支持 Soldier On——一家为现役与退役澳大利亚国防军人员及其家人提供全方位支持的非营利机构。Soldier On 曾在一篇文章中报道我们的合作，正体现了我们与曾经服役者所共有的价值观。",
+      },
+      {
+        label: "行业会员",
+        body: "Guardion 是澳大利亚安保行业协会（ASIAL）的会员，该协会是澳大利亚安保行业的最高行业机构。会员身份使我们恪守 ASIAL 在专业、诚信与合规方面的标准，并通过培训、认证与监管互动，让我们持续紧跟行业最佳实践。",
+      },
     ],
   },
 };

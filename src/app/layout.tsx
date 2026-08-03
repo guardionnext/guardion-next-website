@@ -5,8 +5,7 @@ import "./globals.css";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
-  // 300 (font-light) is unused in the UI — dropped to avoid a wasted font file.
-  weight: ["400", "500"],
+  weight: ["300", "400", "500"],
   style: ["normal"],
   variable: "--font-newsreader",
   display: "swap",

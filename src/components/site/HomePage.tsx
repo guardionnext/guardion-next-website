@@ -26,6 +26,12 @@ import { Reveal } from "@/components/site/Reveal";
 import { Reticle } from "@/components/site/Reticle";
 import { GlobeGraticule } from "@/components/site/GlobeGraticule";
 import { CapabilitiesMarquee } from "@/components/site/CapabilitiesMarquee";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { localePath, type Locale } from "@/lib/i18n";
 import { getServices } from "@/lib/content/ui";
 import { getHomeContent } from "@/lib/content/home";
@@ -58,7 +64,6 @@ export function HomePage({ locale = "en" }: { locale?: Locale }) {
             alt=""
             fill
             priority
-            placeholder="blur"
             sizes="100vw"
             className="kenburns object-cover object-[center_60%] brightness-[1.45] contrast-[1.06] saturate-[1.12]"
             aria-hidden
@@ -521,20 +526,18 @@ export function HomePage({ locale = "en" }: { locale?: Locale }) {
                   {c.faq.intro}
                 </p>
               </div>
-              <div className="border-t border-border">
+              <Accordion type="single" collapsible className="border-t border-border">
                 {c.faq.items.map((f, i) => (
-                  <details key={i} className="group border-b border-border">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-left font-serif text-lg text-foreground [&::-webkit-details-marker]:hidden">
+                  <AccordionItem key={i} value={`faq-${i}`} className="border-b border-border">
+                    <AccordionTrigger className="py-6 text-left font-serif text-lg text-foreground hover:no-underline">
                       {f.q}
-                      <ChevronDown
-                        className="h-5 w-5 shrink-0 text-text-mute transition-transform duration-300 group-open:rotate-180"
-                        aria-hidden
-                      />
-                    </summary>
-                    <p className="pb-6 text-sm leading-relaxed text-text-mute">{f.a}</p>
-                  </details>
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-6 text-sm leading-relaxed text-text-mute">
+                      {f.a}
+                    </AccordionContent>
+                  </AccordionItem>
                 ))}
-              </div>
+              </Accordion>
             </div>
           </Reveal>
         </section>
