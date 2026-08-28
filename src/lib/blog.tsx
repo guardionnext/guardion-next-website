@@ -1,4 +1,7 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
+
+export type FaqItem = { q: string; a: ReactNode };
 
 export type BlogPost = {
   slug: string;
@@ -9,6 +12,10 @@ export type BlogPost = {
   readingMinutes: number;
   author: string;
   body: ReactNode;
+  // Optional FAQ block. When present, the article renders an accessible
+  // accordion and the page emits FAQPage structured data so the answers are
+  // eligible for rich results / "People also ask" placements.
+  faq?: FaqItem[];
 };
 
 function P({ children }: { children: ReactNode }) {
@@ -23,8 +30,251 @@ function H3({ children }: { children: ReactNode }) {
 function Quote({ children }: { children: ReactNode }) {
   return <blockquote>{children}</blockquote>;
 }
+function Ul({ children }: { children: ReactNode }) {
+  return <ul>{children}</ul>;
+}
+function A({ href, children }: { href: string; children: ReactNode }) {
+  return <Link href={href}>{children}</Link>;
+}
+
+// Plain-text version of an FAQ answer, for FAQPage structured data. Google
+// wants the answer as text/HTML, not a React tree, so we keep a string beside
+// each rich answer where the two would differ; simple answers can reuse the
+// node when it is already a string.
+export function faqAnswerText(a: ReactNode): string {
+  if (typeof a === "string") return a;
+  return "";
+}
 
 export const POSTS: BlogPost[] = [
+  {
+    slug: "what-is-close-protection",
+    title: "What is close protection? A plain-language guide",
+    description:
+      "Close protection is the specialised, close-in protection of one person against threats, harassment and harm. What it means, who needs it, and how it works in Australia.",
+    excerpt:
+      "The word gets used loosely and pictured wrongly. A clear guide to what close protection actually is — the term, the discipline, the officer, and how it is done well.",
+    date: "2026-08-28",
+    readingMinutes: 9,
+    author: "Guardion",
+    body: (
+      <>
+        <P>
+          Close protection is the specialised, close-in protection of one
+          person — the principal — against physical threats, harassment and
+          harm. It combines advance planning, risk assessment, secure movement
+          and a trained protective presence, and it is used by people whose
+          profile, wealth or circumstances create sustained exposure:
+          executives, high-net-worth individuals, public figures and visiting
+          dignitaries.
+        </P>
+        <P>
+          That is the whole idea in a sentence. Almost everything else people
+          believe about the work — the dark suits, the coiled earpieces, the
+          drama — describes a fraction of it and misunderstands the rest. The
+          reality is quieter, more considered, and far more about preparation
+          than confrontation.
+        </P>
+
+        <H2>What &ldquo;close protection&rdquo; actually means</H2>
+        <P>
+          The word <em>close</em> refers to proximity, not secrecy. A close
+          protection officer works close to the principal — near enough to see
+          what is developing and to act before it reaches them. It is the
+          opposite of manned guarding, where a person stands at a fixed point
+          and watches a place. Close protection watches a person, and moves
+          with them through the whole fabric of their day.
+        </P>
+        <P>
+          It is also a system rather than a single individual. The person
+          walking a few paces behind the principal is the visible last few
+          percent of a much larger body of work — assessment, reconnaissance,
+          coordination and rehearsal — that happened before anyone left the
+          door.
+        </P>
+
+        <H2>What a close protection officer does</H2>
+        <P>
+          A close protection officer (often shortened to CPO, and sometimes
+          called a personal protection specialist) is responsible for a
+          principal&rsquo;s safety across ordinary movements and high-risk
+          moments alike. On any given engagement that means:
+        </P>
+        <Ul>
+          <li>
+            <strong>Risk assessment</strong> — building an honest picture of who
+            the principal is, what makes them of interest to a hostile party,
+            and where the practical points of exposure sit.
+          </li>
+          <li>
+            <strong>Advance work</strong> — surveying routes, walking venues and
+            confirming arrival and departure points before the principal ever
+            arrives.
+          </li>
+          <li>
+            <strong>Secure movement</strong> — integrated{" "}
+            <A href="/services/security-driving">security driving</A>, timed
+            journeys and rehearsed contingencies for medical, mechanical and
+            hostile events.
+          </li>
+          <li>
+            <strong>Protective presence</strong> — reading a room, managing
+            proximity, and staying close enough to matter without becoming the
+            thing everyone notices.
+          </li>
+        </Ul>
+        <P>
+          The visible skills matter, but the defining ones are judgement and
+          discretion. A good CPO is chosen as much for temperament and manner as
+          for physical capability, because the work is client-facing and takes
+          place in the rooms the principal is paid to move through.
+        </P>
+
+        <H2>
+          Close protection, executive protection and bodyguards — the same work,
+          different names
+        </H2>
+        <P>
+          These terms are often used interchangeably, and the confusion is
+          reasonable. In practice they describe the same discipline from
+          different angles:
+        </P>
+        <H3>Close protection vs executive protection</H3>
+        <P>
+          <em>Close protection</em> is the British and Australian term, and it
+          emphasises the close-in protective role. <em>Executive protection</em>{" "}
+          is the American term, and it tends to frame the work around corporate
+          principals, business travel and the office that supports them. The
+          skills, planning and standards are the same — we cover the distinction
+          in more depth in{" "}
+          <A href="/blog/what-executive-protection-actually-involves">
+            what executive protection actually involves
+          </A>
+          .
+        </P>
+        <H3>Bodyguard vs close protection officer</H3>
+        <P>
+          <em>Bodyguard</em> describes the physical function — standing between
+          a person and harm. A close protection officer does that too, but the
+          term implies formal training, licensing and a planning discipline
+          behind the presence. Put simply: every CPO is a bodyguard, but not
+          every bodyguard works to CPO standards.
+        </P>
+
+        <H2>The planning behind the presence</H2>
+        <P>
+          People sometimes ask about the &ldquo;7 Ps&rdquo; of close
+          protection. It is a planning maxim borrowed from military doctrine —{" "}
+          <em>
+            Proper Planning and Preparation Prevents Poor Performance
+          </em>{" "}
+          — and it captures the single most important truth about the work: the
+          outcome on the day is decided beforehand, by the assessment,
+          reconnaissance and rehearsal, not by improvisation in the moment.
+        </P>
+        <Quote>
+          When a plan is done well, the day itself is unremarkable. That is the
+          intention. A protective operation that looks dramatic is usually one
+          that has been forced to improvise.
+        </Quote>
+        <P>
+          This is why arranging protection well is largely an exercise in
+          preparation and coordination. If you are organising it for a specific
+          occasion, our practical guide to{" "}
+          <A href="/blog/how-to-arrange-close-protection-for-an-event">
+            arranging close protection for an event
+          </A>{" "}
+          walks through the steps end to end.
+        </P>
+
+        <H2>Who needs close protection</H2>
+        <P>
+          Close protection suits people whose exposure is sustained enough that
+          it needs to be managed — without turning their life into a security
+          operation. It is equally suited to a short, sensitive window rather
+          than a permanent arrangement. Common situations include:
+        </P>
+        <Ul>
+          <li>High-net-worth individuals and their immediate family</li>
+          <li>Executives and founders with a public profile</li>
+          <li>Public figures during periods of heightened attention</li>
+          <li>Visiting principals who need an Australian-based team</li>
+          <li>Anyone subject to a specific, identified threat or unwelcome contact</li>
+        </Ul>
+        <P>
+          Much of the demand is for exactly this kind of short-notice or
+          project-based cover — a court appearance, a public announcement, a
+          family transition, a single trip. Good protection scales up when the
+          picture requires it and scales down when it does not.
+        </P>
+
+        <H2>What good close protection looks like</H2>
+        <P>
+          The best protection is discreet, proportionate and coordinated. It is
+          sized by requirement rather than theatre — a small, rehearsed team,
+          never an entourage. It coordinates with venue security, drivers and
+          household staff rather than competing with them. And it is honest: a
+          reputable firm will tell you when protection is warranted, what form
+          it should take, and sometimes that it is not needed at all.
+        </P>
+
+        <H2>Close protection in Australia</H2>
+        <P>
+          In Australia, close protection is a licensed security activity,
+          regulated state by state. Operators must hold current security
+          licences and accredited training, and the work is performed unarmed.
+          A serious provider holds the licences for the jurisdictions it works
+          in and can show them — Guardion operates under security licences
+          across Queensland, New South Wales, the ACT, Victoria and South
+          Australia. Where a matter extends overseas, the honest model is a
+          disciplined home team working through vetted local partners rather
+          than claiming to operate everywhere under its own licence.
+        </P>
+        <P>
+          If any of this reflects your situation, the right first step is not to
+          hire anyone — it is a confidential conversation. You can read how we
+          approach the work on our{" "}
+          <A href="/services/close-protection">close protection service page</A>,
+          or <A href="/contact">speak to a principal of the firm</A> and
+          describe the situation candidly.
+        </P>
+      </>
+    ),
+    faq: [
+      {
+        q: "What does “close protection” mean?",
+        a: "Close protection is the specialised, close-in protection of one individual — the principal — against physical threats, harassment and harm. The word “close” refers to the operator’s proximity to the person, not to secrecy. It combines advance planning, risk assessment, secure movement and a trained protective presence.",
+      },
+      {
+        q: "What is the difference between close protection and executive protection?",
+        a: "They describe the same discipline from different angles. “Close protection” is the British and Australian term and emphasises the close-in protective role; “executive protection” is the American term and tends to frame the work around corporate principals and business travel. In practice the skills, planning and standards are the same.",
+      },
+      {
+        q: "What is the difference between a bodyguard and a close protection officer?",
+        a: "“Bodyguard” describes the physical function — standing between a person and harm. A close protection officer (CPO) does that too, but the term implies formal training, licensing and a planning discipline: risk assessment, advance work, route and venue reconnaissance and contingency planning. Every CPO is a bodyguard; not every bodyguard works to CPO standards.",
+      },
+      {
+        q: "Who is a close protection officer?",
+        a: "A close protection officer is a trained, licensed operator responsible for a principal’s safety across their daily life and high-risk moments. Beyond physical capability, a good CPO is a planner and a communicator — chosen as much for judgement and discretion as for protective skill.",
+      },
+      {
+        q: "What are the 7 P’s in close protection?",
+        a: "The “7 Ps” is a planning maxim borrowed from military doctrine: Proper Planning and Preparation Prevents Poor Performance. In close protection it captures the core truth of the work — that the outcome on the day is decided by the assessment, reconnaissance and rehearsal done beforehand, not by improvisation.",
+      },
+      {
+        q: "Can anyone do close protection?",
+        a: "No. In Australia, close protection is a licensed security activity regulated state by state, requiring accredited training, background checks and a current security licence. Beyond the licence, the work demands temperament, fitness, medical training and sound judgement — capabilities that take time to build.",
+      },
+      {
+        q: "Is close protection a stressful job?",
+        a: "It can be. The work involves long hours, constant situational awareness, travel and responsibility for another person’s safety. Well-run operations manage that load through planning, clear team roles and realistic rostering, so alertness is sustainable rather than a matter of running on adrenaline.",
+      },
+      {
+        q: "What is the highest level of bodyguard?",
+        a: "There is no single global rank, but the upper tier of the profession is close protection for high-threat principals — dignitaries, heads of state and high-profile individuals — delivered by teams with advanced training in surveillance detection, protective driving, medical response and, where lawful, firearms. In Australia this work is performed unarmed and to state licensing standards.",
+      },
+    ],
+  },
   {
     slug: "what-executive-protection-actually-involves",
     title: "What executive protection actually involves",

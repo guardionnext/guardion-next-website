@@ -7,7 +7,13 @@ import { Footer } from "@/components/site/Footer";
 import { ContactBand } from "@/components/site/ContactBand";
 import { Reveal } from "@/components/site/Reveal";
 import { LionWatermark } from "@/components/site/LionWatermark";
-import { getPostBySlug, getAllPosts, formatPostDate } from "@/lib/blog";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { getPostBySlug, getAllPosts, formatPostDate, faqAnswerText } from "@/lib/blog";
 import { SITE } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -86,11 +92,29 @@ export default async function BlogPostPage({
     ],
   };
 
+  const faqJsonLd =
+    post.faq && post.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faq.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faqAnswerText(f.a),
+            },
+          })),
+        }
+      : null;
+
+  const schema = [jsonLd, breadcrumbJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <Header />
       <main id="main">
@@ -126,6 +150,30 @@ export default async function BlogPostPage({
             <article className="post-prose">{post.body}</article>
           </Reveal>
         </section>
+
+        {/* FAQ */}
+        {post.faq && post.faq.length > 0 && (
+          <section className="border-t border-border bg-background">
+            <Reveal className="mx-auto max-w-[780px] px-6 py-20 md:py-24">
+              <span className="eyebrow mb-6">Frequently asked</span>
+              <h2 className="mt-6 font-serif text-[28px] leading-[1.12] tracking-tight text-foreground md:text-[36px]">
+                Common questions about close protection
+              </h2>
+              <Accordion type="single" collapsible className="mt-10 border-t border-border">
+                {post.faq.map((f, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="border-b border-border">
+                    <AccordionTrigger className="py-6 text-left font-serif text-lg text-foreground hover:no-underline">
+                      {f.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-6 text-[15px] leading-relaxed text-text-mute">
+                      {f.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </Reveal>
+          </section>
+        )}
 
         {/* Related */}
         {others.length > 0 && (
