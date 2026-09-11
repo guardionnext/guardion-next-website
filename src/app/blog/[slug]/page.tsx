@@ -13,7 +13,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { getPostBySlug, getAllPosts, formatPostDate, faqAnswerText } from "@/lib/blog";
+import {
+  getPostBySlug,
+  getAllPosts,
+  formatPostDate,
+  faqAnswerText,
+} from "@/lib/blog";
 import { SITE } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -62,7 +67,9 @@ export default async function BlogPostPage({
 
   const url = `/blog/${slug}`;
   const absoluteUrl = `${SITE.url}${url}`;
-  const others = getAllPosts().filter((p) => p.slug !== post.slug).slice(0, 2);
+  const others = getAllPosts()
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 2);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -87,7 +94,12 @@ export default async function BlogPostPage({
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Field Notes", item: `${SITE.url}/blog` },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Field Notes",
+        item: `${SITE.url}/blog`,
+      },
       { "@type": "ListItem", position: 3, name: post.title, item: absoluteUrl },
     ],
   };
@@ -157,11 +169,19 @@ export default async function BlogPostPage({
             <Reveal className="mx-auto max-w-[780px] px-6 py-20 md:py-24">
               <span className="eyebrow mb-6">Frequently asked</span>
               <h2 className="mt-6 font-serif text-[28px] leading-[1.12] tracking-tight text-foreground md:text-[36px]">
-                Common questions about close protection
+                {post.faqHeading}
               </h2>
-              <Accordion type="single" collapsible className="mt-10 border-t border-border">
+              <Accordion
+                type="single"
+                collapsible
+                className="mt-10 border-t border-border"
+              >
                 {post.faq.map((f, i) => (
-                  <AccordionItem key={i} value={`faq-${i}`} className="border-b border-border">
+                  <AccordionItem
+                    key={i}
+                    value={`faq-${i}`}
+                    className="border-b border-border"
+                  >
                     <AccordionTrigger className="py-6 text-left font-serif text-lg text-foreground hover:no-underline">
                       {f.q}
                     </AccordionTrigger>
