@@ -51,6 +51,197 @@ export function faqAnswerText(a: ReactNode): string {
 
 export const POSTS: BlogPost[] = [
   {
+    slug: "residential-security-how-you-live",
+    title:
+      "Residential security starts with how you live, not just where you live",
+    description:
+      "Good residential security isn't about turning a home into a fortress. It starts with understanding routine, exposure and the way a family actually lives.",
+    excerpt:
+      "The home is often the most predictable part of a person's life — and predictability is what the wrong person looks for first. Why good residential security starts with how a family lives.",
+    date: "2026-09-23",
+    readingMinutes: 6,
+    author: "Guardion",
+    body: (
+      <>
+        <P>
+          Home is where people let their guard down. It&rsquo;s where they
+          relax, spend time with family and stop thinking about the world
+          outside.
+        </P>
+        <P>That&rsquo;s exactly why it deserves careful protection.</P>
+        <P>
+          For many families, high-profile individuals and business owners, the
+          home is also the most predictable part of their lives. The same people
+          come and go. Cars leave at similar times each morning. Children follow
+          the same school run. Contractors, cleaners and delivery drivers form a
+          regular pattern.
+        </P>
+        <P>
+          None of this is unusual. But predictability is what someone with bad
+          intentions looks for first.
+        </P>
+
+        <H2>Why homes are more exposed than people realise</H2>
+        <P>
+          When most people think about residential security, they think about
+          what they can see: gates, cameras, lighting and perhaps a guard at the
+          front entrance.
+        </P>
+        <P>
+          Those measures matter. But a lot of exposure happens well beyond the
+          property line.
+        </P>
+        <P>
+          Consider how much can be learned about a household without ever going
+          near it:
+        </P>
+        <Ul>
+          <li>
+            Real estate listings and floor plans that stay online long after a
+            sale
+          </li>
+          <li>
+            Renovation photos showing layouts, entry points and security systems
+          </li>
+          <li>
+            Social media posts that reveal holidays, routines or when the house
+            is empty
+          </li>
+          <li>Tagged locations from family members, friends or staff</li>
+          <li>Public business records linked to a residential address</li>
+          <li>Vehicles regularly photographed outside the home</li>
+        </Ul>
+        <P>
+          Each piece on its own seems harmless. Put together, they can reveal
+          routines, relationships and vulnerabilities that were never meant to
+          be public.
+        </P>
+
+        <H2>More guards isn&rsquo;t always the answer</H2>
+        <P>
+          It&rsquo;s natural to assume that better protection means more people
+          on site. Sometimes it does.
+        </P>
+        <P>
+          But a strong physical presence can still start at a disadvantage if
+          too much about the household is already exposed. Adding another guard
+          doesn&rsquo;t remove the information someone has already gathered.
+        </P>
+        <P>
+          Often the most effective improvements are the quiet ones: changing a
+          predictable habit, tightening who has access to the property, briefing
+          staff properly, or removing information that should never have been
+          public in the first place.
+        </P>
+
+        <H2>What good residential security looks like</H2>
+        <P>
+          At Guardion, we believe{" "}
+          <A href="/services/residential-security">residential security</A>{" "}
+          should be built around the household, not the other way around. A
+          well-designed approach usually includes the following.
+        </P>
+        <P>
+          <strong>Understanding how the family lives.</strong> Before
+          recommending anything, we need to understand daily routines, who has
+          access to the home, how the family travels and what matters most to
+          them. A plan that ignores lifestyle won&rsquo;t be followed for long.
+        </P>
+        <P>
+          <strong>Looking at the home from the outside.</strong> This means
+          assessing both the physical property and the wider footprint: what can
+          be seen from the street, what can be found online and what patterns an
+          observer might pick up over time.
+        </P>
+        <P>
+          <strong>Building protection in layers.</strong> Depending on the level
+          of risk, this may combine static security presence, mobile patrols,
+          access control, surveillance systems and background checks on staff or
+          contractors. No single measure does the job alone.
+        </P>
+        <P>
+          <strong>Planning for change.</strong> Risk isn&rsquo;t constant.
+          Travel, renovations, public events, media attention or a vacant home
+          during holidays can all change a household&rsquo;s exposure. Good
+          security adjusts before those moments, not after.
+        </P>
+        <P>
+          <strong>Keeping it discreet.</strong> If security makes a family feel
+          like they&rsquo;re living in a compound, something has gone wrong. The
+          best arrangements protect without dominating daily life.
+        </P>
+
+        <H2>Signs it may be time to review your residential security</H2>
+        <Ul>
+          <li>
+            Your profile, business or public visibility has recently grown
+          </li>
+          <li>
+            You&rsquo;ve had unexplained visitors, calls or attention near the
+            home
+          </li>
+          <li>
+            Staff, contractors or household arrangements have changed
+          </li>
+          <li>
+            You&rsquo;re planning extended travel or the property will be vacant
+          </li>
+          <li>
+            Your current security was set up years ago and hasn&rsquo;t been
+            reviewed since
+          </li>
+          <li>
+            You&rsquo;re unsure what information about your home is publicly
+            available
+          </li>
+        </Ul>
+
+        <H2>A home should still feel like a home</H2>
+        <P>
+          Residential security isn&rsquo;t about fear, and it isn&rsquo;t about
+          building walls. It&rsquo;s about making sure the one place you should
+          feel safest actually is.
+        </P>
+        <P>
+          The right approach protects your family, property and privacy while
+          letting you live the way you want to.
+        </P>
+        <P>
+          If you&rsquo;d like a confidential conversation about your home&rsquo;s
+          security, <A href="/contact">contact Guardion</A> to discuss a plan
+          tailored to your household.
+        </P>
+      </>
+    ),
+    faqHeading: "Common questions about residential security",
+    faq: [
+      {
+        q: "What is residential security?",
+        a: "Residential security is the protection of a home and the people who live in it, built around how the household actually operates rather than a fixed set of products. A good approach combines an understanding of daily routines, an assessment of the property and its wider footprint, and layered measures — which may include a static or mobile security presence, access control, surveillance and vetting of staff or contractors — sized to the level of risk.",
+      },
+      {
+        q: "Isn’t residential security just cameras, gates and alarms?",
+        a: "Those measures matter, but they only address what can be seen at the property line. A great deal of exposure sits elsewhere — in real estate listings, renovation photos, social media posts, tagged locations and public records that reveal a household’s layout, routines and movements. Effective residential security looks at that wider picture as well as the physical property.",
+      },
+      {
+        q: "Do I need more guards to be safer at home?",
+        a: "Not necessarily. A strong physical presence can still start at a disadvantage if too much about the household is already exposed, and adding another guard doesn’t remove information someone has already gathered. Often the most effective changes are quieter ones — adjusting a predictable habit, tightening who has access, briefing staff properly, or removing information that was never meant to be public.",
+      },
+      {
+        q: "How can someone learn about my home without going near it?",
+        a: "More than most people expect. Real estate listings and floor plans stay online long after a sale, renovation photos reveal layouts and entry points, social posts show when a house is empty, tagged locations map routines, and public business records can link a name to a residential address. Each piece seems harmless alone; put together, they can expose routines, relationships and vulnerabilities that were never meant to be public.",
+      },
+      {
+        q: "When should I review my residential security?",
+        a: "It’s worth reviewing when your profile or public visibility grows, when you’ve had unexplained visitors or attention near the home, when staff or household arrangements change, when you’re planning extended travel or the property will be vacant, or simply when your current arrangements were set up years ago and haven’t been looked at since. If you’re unsure what information about your home is publicly available, that on its own is a reason to review.",
+      },
+      {
+        q: "Is residential security only for celebrities or the very wealthy?",
+        a: "No. It suits any household whose profile, business, wealth or circumstances create exposure worth managing — and it’s equally suited to a specific period, such as extended travel or a spell of heightened public attention, rather than a permanent arrangement. The goal is proportionate protection that fits how a family lives, not turning a home into a compound.",
+      },
+    ],
+  },
+  {
     slug: "executive-protection-services",
     title: "Executive protection services: a plain-language guide",
     description:
