@@ -42,7 +42,7 @@ export async function generateMetadata({
 
   const url = `/blog/${slug}`;
   return {
-    title: `${post.title} | Guardion`,
+    title: post.metaTitle ?? `${post.title} | Guardion`,
     description: post.description,
     alternates: { canonical: url },
     openGraph: {

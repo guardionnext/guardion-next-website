@@ -6,6 +6,10 @@ export type FaqItem = { q: string; a: ReactNode };
 export type BlogPost = {
   slug: string;
   title: string;
+  // Optional SEO title for the <title> tag, when it should read differently
+  // from the on-page headline (post.title). Include the " | Guardion" suffix
+  // here if wanted — it is used verbatim. Falls back to `${title} | Guardion`.
+  metaTitle?: string;
   description: string;
   excerpt: string;
   date: string; // ISO
@@ -50,6 +54,227 @@ export function faqAnswerText(a: ReactNode): string {
 }
 
 export const POSTS: BlogPost[] = [
+  {
+    slug: "what-is-security-driving",
+    title:
+      "More than a chauffeur: what protective security driving actually is",
+    metaTitle:
+      "What is a security driver? A guide to protective security driving | Guardion",
+    description:
+      "Security driving is the trained, protective transport of a person at risk. What a security driver does, how it differs from a chauffeur, and how it works in Australia.",
+    excerpt:
+      "A security driver is a trained protective operator who happens to be behind the wheel. What the job actually is, how it differs from a chauffeur, and when an armoured vehicle makes sense.",
+    date: "2026-10-08",
+    readingMinutes: 8,
+    author: "Guardion",
+    faqHeading: "Common questions about security driving",
+    body: (
+      <>
+        <P>
+          A security driver is a trained protective operator who happens to be
+          behind the wheel. The job is not to get someone from one place to
+          another in comfort. It is to move a person at risk through the most
+          exposed part of their day — the journey — without incident. It
+          combines route planning, secure vehicle handling, surveillance
+          awareness and rehearsed responses for medical, mechanical and hostile
+          events.
+        </P>
+        <P>
+          That is the whole idea in a sentence. Almost everything else people
+          picture — the fast cars and the dramatic manoeuvres — describes a
+          fraction of the work and misunderstands the rest. Good security
+          driving is quiet, planned and almost boring to watch. That is
+          precisely the point.
+        </P>
+
+        <H2>Security driver vs chauffeur: the real difference</H2>
+        <P>
+          A chauffeur and a security driver can look identical from the kerb. A
+          clean vehicle, a suit, a door held open. What separates them is what
+          they are optimising for.
+        </P>
+        <P>
+          A chauffeur optimises comfort and punctuality. The measure of a good
+          one is a smooth ride and an on-time arrival.
+        </P>
+        <P>
+          A security driver optimises safety. Comfort and punctuality still
+          matter, but they sit underneath a different priority: getting the
+          principal through the journey with their exposure managed. That
+          changes how the route is chosen, where the vehicle stops, how the
+          driver reads the traffic and the pavement, and what happens if
+          something goes wrong. A chauffeur reacts to a problem. A security
+          driver has already planned for it.
+        </P>
+        <P>
+          Put simply, every security driver can perform the role of a chauffeur.
+          Very few chauffeurs are trained to do what a security driver does.
+        </P>
+
+        <H2>What a security driver actually does</H2>
+        <P>
+          The visible part — the driving — is the last few percent. The work
+          that makes it safe happens before and around the journey:
+        </P>
+        <Ul>
+          <li>
+            <strong>Route planning and reconnaissance.</strong> Primary and
+            alternate routes, known choke points, timing, and the quiet detail
+            of where to actually stop. The kerb outside the venue matters more
+            than the road to it.
+          </li>
+          <li>
+            <strong>Secure embus and debus.</strong> Getting in and out of the
+            vehicle is the moment of greatest exposure. It is planned,
+            positioned and, where it matters, rehearsed.
+          </li>
+          <li>
+            <strong>Surveillance awareness.</strong> Noticing whether the same
+            vehicle has appeared twice, and knowing what to do about it — calmly,
+            without alarming the principal.
+          </li>
+          <li>
+            <strong>Defensive and evasive driving.</strong> The trained ability
+            to keep control of the vehicle under pressure and to create distance
+            from a developing problem. Used rarely, but the training is why it is
+            there when it is needed.
+          </li>
+          <li>
+            <strong>Contingency response.</strong> A rehearsed plan for the
+            realistic events: a medical issue, a breakdown, a blocked route, a
+            hostile approach. Knowing the nearest hospital is as much a part of
+            the job as knowing the fastest road.
+          </li>
+        </Ul>
+
+        <H2>The training behind the wheel</H2>
+        <P>
+          This is where a security driver is made or not. Confidence is not
+          competence, and a powerful car does not make a protective driver.
+        </P>
+        <P>
+          A genuine security driver brings a real protective-driving background,
+          typically drawn from military or police service, or from an accredited
+          international{" "}
+          <A href="/blog/what-is-close-protection">close-protection</A> provider
+          where offensive and defensive driving is trained properly — on track
+          and skid pan rather than in theory. Guardion&rsquo;s own founder
+          trained with Ronin South Africa, one of the longest-standing and most
+          respected close-protection schools internationally, where protective
+          driving sits inside a wider close-protection discipline.
+        </P>
+        <P>
+          The point is not the badge. It is that the person driving has been
+          trained to handle a vehicle under pressure and to think protectively
+          while doing it, and has the temperament to do it quietly. As with the
+          rest of this field, judgement and discretion matter as much as
+          capability. The security driver is often in the car with the principal
+          and their family, so manner counts.
+        </P>
+
+        <H2>Armoured vehicles: when they make sense</H2>
+        <P>
+          Security driving does not always mean an armoured vehicle, and most
+          engagements do not call for one. The vehicle is chosen to fit the
+          threat picture, not to make a statement.
+        </P>
+        <P>
+          Where the assessment warrants it, Guardion has access to B-level
+          armoured vehicles. More often, the protection comes from the driver
+          and the plan rather than the car itself. A good provider will tell you
+          honestly which of the two your situation actually needs, and will not
+          sell armour for the sake of it.
+        </P>
+
+        <H2>How security driving fits into protection</H2>
+        <P>
+          Security driving is rarely a standalone service. It is usually one
+          integrated part of a protection plan — the part that covers movement —
+          working alongside the rest of a{" "}
+          <A href="/services/close-protection">close protection</A> or{" "}
+          <A href="/services/executive-protection">executive protection</A>{" "}
+          operation. The driver coordinates with the protection team, the venue
+          and the schedule so that arrivals, departures and transfers are
+          handled as one plan rather than several.
+        </P>
+        <P>
+          For some clients, secure movement is the main thing they need — a safe
+          pair of hands for specific journeys. For others it is one thread in a
+          fuller picture. Either way, it is sized to the requirement and scaled
+          down the moment the requirement passes.
+        </P>
+
+        <H2>Who needs a security driver</H2>
+        <P>
+          Security driving suits people whose movements carry more exposure than
+          the rest of their day:
+        </P>
+        <Ul>
+          <li>
+            Executives and public figures travelling to and from appearances
+          </li>
+          <li>High-net-worth individuals and their families</li>
+          <li>
+            Visiting principals who need an Australian-based driver who knows the
+            ground
+          </li>
+          <li>
+            Anyone navigating a sensitive window, such as a court appearance, a
+            public announcement or a single high-profile event
+          </li>
+        </Ul>
+        <P>
+          As with all protective work, the need is defined by a genuine,
+          identified reason rather than a title.
+        </P>
+
+        <H2>Security driving in Australia</H2>
+        <P>
+          In Australia, protective security work is a licensed activity,
+          regulated state by state, and performed unarmed. A serious provider
+          holds current security licences for the jurisdictions it operates in
+          and uses drivers with verifiable protective-driving training. Guardion
+          operates under security licences across Queensland, New South Wales,
+          the ACT, Victoria and South Australia. Where a matter extends overseas,
+          the honest model is a disciplined home team working through vetted
+          local partners, within local law, rather than claiming to operate
+          everywhere under its own licence.
+        </P>
+
+        <H2>A quiet conversation</H2>
+        <P>
+          If secure movement is something you or someone you look after may need,
+          the right first step is a confidential conversation rather than a
+          booking. You can read how we approach it on our{" "}
+          <A href="/services/security-driving">security driving service page</A>,
+          or <A href="/contact">speak to a principal of the firm</A> and describe
+          the situation candidly.
+        </P>
+      </>
+    ),
+    faq: [
+      {
+        q: "What is a security driver?",
+        a: "A trained protective operator who transports a person at risk safely, combining secure driving with route planning, surveillance awareness and contingency response. They are protecting a person, not just driving a car.",
+      },
+      {
+        q: "What is the difference between a security driver and a chauffeur?",
+        a: "A chauffeur optimises comfort and punctuality. A security driver optimises safety, and is trained to plan routes, manage exposure and respond to medical, mechanical and hostile events.",
+      },
+      {
+        q: "Do security drivers use armoured cars?",
+        a: "Sometimes. Armoured vehicles are used where the threat assessment warrants it. Guardion has access to B-level armoured vehicles, but most engagements are protected by the driver and the plan rather than the vehicle.",
+      },
+      {
+        q: "Is a security driver the same as a bodyguard?",
+        a: "They overlap. A security driver is often a trained close-protection operator whose role on a given engagement is secure movement. Protective driving is one of the core skills taught in close-protection training.",
+      },
+      {
+        q: "What qualifications does a security driver need?",
+        a: "A current security licence for the state they work in, plus genuine protective-driving training, usually from a military, police or accredited international close-protection background.",
+      },
+    ],
+  },
   {
     slug: "residential-security-how-you-live",
     title:
